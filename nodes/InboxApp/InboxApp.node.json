@@ -1,0 +1,23 @@
+{
+	"node": "n8n-nodes-inboxapp.inboxApp",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales", "Communication"],
+	"subcategories": {
+		"Sales": ["CRM"],
+		"Communication": ["Social Media"]
+	},
+	"alias": ["inbox", "twitter", "x", "dm", "prospect", "thread", "message"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://docs.inboxapp.com/api-reference/introduction"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://docs.inboxapp.com/api-reference/introduction"
+			}
+		]
+	}
+}

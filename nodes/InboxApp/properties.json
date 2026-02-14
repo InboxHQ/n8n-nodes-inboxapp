@@ -1,0 +1,3119 @@
+[
+	{
+		"displayName": "Resource",
+		"name": "resource",
+		"type": "options",
+		"noDataExpression": true,
+		"options": [
+			{
+				"name": "Teams",
+				"value": "Teams",
+				"description": "Teams are shared workspace for members to view and manage account links, tags, statuses, campaigns, conversations, and more."
+			},
+			{
+				"name": "Threads",
+				"value": "Threads",
+				"description": "\nThreads represent conversations between an account linked to your team and a prospect on Twitter.\n            "
+			},
+			{
+				"name": "Messages",
+				"value": "Messages",
+				"description": "\nMessages are the individual messages sent in a thread.\n            "
+			},
+			{
+				"name": "Account Links",
+				"value": "Account Links",
+				"description": "\nAccount links represent X accounts connected to your team.\n            "
+			},
+			{
+				"name": "Members",
+				"value": "Members",
+				"description": "\nMembers are Inbox users who can access the team.\n            "
+			},
+			{
+				"name": "Prospects",
+				"value": "Prospects",
+				"description": "\nProspects represent external profiles on X.\n            "
+			},
+			{
+				"name": "Tags",
+				"value": "Tags",
+				"description": "\nTags are labels for prospects.\n            "
+			},
+			{
+				"name": "Statuses",
+				"value": "Statuses",
+				"description": "\nStatuses are used to track the deal stage or any fixed state for a prospect.\n            "
+			},
+			{
+				"name": "Colors",
+				"value": "Colors",
+				"description": "\nGet predefined color options that can be used when creating or updating tags and statuses.\n            "
+			},
+			{
+				"name": "Events",
+				"value": "Events",
+				"description": ""
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Teams"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Team Get",
+				"value": "Team Get",
+				"action": "Get team",
+				"description": "Get the team associated with the supplied API token.",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/team"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Threads List",
+				"value": "Threads List",
+				"action": "List threads",
+				"description": "List threads ordered by recency with advanced filtering",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/threads"
+					}
+				}
+			},
+			{
+				"name": "Threads Create",
+				"value": "Threads Create",
+				"action": "Create thread",
+				"description": "Create a new active thread with a prospect",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/threads"
+					}
+				}
+			},
+			{
+				"name": "Threads Lookup",
+				"value": "Threads Lookup",
+				"action": "Lookup thread",
+				"description": "Find a thread by account link ID and external identifier (platform ID or external ID)",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/threads/lookup"
+					}
+				}
+			},
+			{
+				"name": "Threads Lookup By Username",
+				"value": "Threads Lookup By Username",
+				"action": "Lookup threads by username",
+				"description": "Find all threads for a prospect by their exact platform username. Returns threads across all account links.",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/threads/lookup-by-username"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Get",
+				"value": "Threads Thread Get",
+				"action": "Get thread",
+				"description": "Get details of a specific thread",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Update",
+				"value": "Threads Thread Update",
+				"action": "Update thread",
+				"description": "Mark a thread done or change assignee",
+				"routing": {
+					"request": {
+						"method": "PATCH",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Delete",
+				"value": "Threads Thread Delete",
+				"action": "Delete thread",
+				"description": "Soft delete a thread",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Typing",
+				"value": "Threads Thread Typing",
+				"action": "Send typing indicator",
+				"description": "Sends a typing indicator to the external party in the thread. Only supported for X Chat (encrypted) threads.",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/typing"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Settings",
+				"value": "Threads Thread Settings",
+				"action": "Update thread settings",
+				"description": "Update settings for a specific thread",
+				"routing": {
+					"request": {
+						"method": "PATCH",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/settings"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Threads Thread Messages List",
+				"value": "Threads Thread Messages List",
+				"action": "List messages",
+				"description": "List messages in a thread with pagination support",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Messages Create",
+				"value": "Threads Thread Messages Create",
+				"action": "Send message",
+				"description": "Send a message in a thread",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Messages Message Edit",
+				"value": "Threads Thread Messages Message Edit",
+				"action": "Edit message",
+				"description": "Edit a message in a thread. Only works for X Chat (encrypted DM) threads.",
+				"routing": {
+					"request": {
+						"method": "PATCH",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Messages Message Delete",
+				"value": "Threads Thread Messages Message Delete",
+				"action": "Delete message",
+				"description": "Delete a message in a thread. Only works for X Chat (encrypted DM) threads.",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Messages Message History",
+				"value": "Threads Thread Messages Message History",
+				"action": "Get message history",
+				"description": "Get the edit history and deletion status of a message. Returns all versions of the message content over time.",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}/history"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Messages Message Reactions Add",
+				"value": "Threads Thread Messages Message Reactions Add",
+				"action": "Add reaction",
+				"description": "Add a reaction to a message. Only works for non-sandbox threads.",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}/reactions/reactions"
+					}
+				}
+			},
+			{
+				"name": "Threads Thread Messages Message Reactions Remove",
+				"value": "Threads Thread Messages Message Reactions Remove",
+				"action": "Remove reaction",
+				"description": "Remove a reaction from a message. Only works for non-sandbox threads.",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}/reactions/reactions"
+					}
+				}
+			},
+			{
+				"name": "Threads Messages Quick Send",
+				"value": "Threads Messages Quick Send",
+				"action": "Quick send message",
+				"description": "Send a message without knowing the thread ID ahead of time. Automatically creates a thread if needed.",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/threads/messages"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Account Links"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Account Links List",
+				"value": "Account Links List",
+				"action": "List account links",
+				"description": "List all account links for the team",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/account-links"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Members"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Members List",
+				"value": "Members List",
+				"action": "List members",
+				"description": "List all members of the team",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/members"
+					}
+				}
+			},
+			{
+				"name": "Members Get",
+				"value": "Members Get",
+				"action": "Get member",
+				"description": "Get details of a specific member",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/members/{{$parameter[\"memberId\"]}}"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Prospects Get",
+				"value": "Prospects Get",
+				"action": "Get prospect",
+				"description": "Get details of a specific prospect",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/prospects/{{$parameter[\"prospectId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Prospects Update",
+				"value": "Prospects Update",
+				"action": "Update prospect context",
+				"description": "Update context of a specific prospect",
+				"routing": {
+					"request": {
+						"method": "PATCH",
+						"url": "=/prospects/{{$parameter[\"prospectId\"]}}/context"
+					}
+				}
+			},
+			{
+				"name": "Prospects Lookup",
+				"value": "Prospects Lookup",
+				"action": "Lookup prospect",
+				"description": "Find an Inbox prospect by platform ID. Note that not all of Twitter is included here. A separate search API will be available for profiles not in our CRM later.",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/prospects/lookup"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Tags List",
+				"value": "Tags List",
+				"action": "List tags",
+				"description": "List all tags in the team",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/tags"
+					}
+				}
+			},
+			{
+				"name": "Tags Create",
+				"value": "Tags Create",
+				"action": "Create tag",
+				"description": "Create a new tag for organizing threads and prospects",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/tags"
+					}
+				}
+			},
+			{
+				"name": "Tags Get",
+				"value": "Tags Get",
+				"action": "Get tag",
+				"description": "Get details of a specific tag",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/tags/{{$parameter[\"tagId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Tags Update",
+				"value": "Tags Update",
+				"action": "Update tag",
+				"description": "Update a tag's name or color",
+				"routing": {
+					"request": {
+						"method": "PATCH",
+						"url": "=/tags/{{$parameter[\"tagId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Tags Delete",
+				"value": "Tags Delete",
+				"action": "Delete tag",
+				"description": "Delete a tag. This will remove the tag from all threads and prospects.",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/tags/{{$parameter[\"tagId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Tags Colors",
+				"value": "Tags Colors",
+				"action": "List available colors",
+				"description": "Get a list of predefined colors that can be used when creating or updating tags",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/tags/colors"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Statuses List",
+				"value": "Statuses List",
+				"action": "List statuses",
+				"description": "List all statuses in the team",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/statuses"
+					}
+				}
+			},
+			{
+				"name": "Statuses Create",
+				"value": "Statuses Create",
+				"action": "Create status",
+				"description": "Create a new status to track leads through your sales pipeline",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/statuses"
+					}
+				}
+			},
+			{
+				"name": "Statuses Get",
+				"value": "Statuses Get",
+				"action": "Get status",
+				"description": "Get details of a specific status",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/statuses/{{$parameter[\"statusId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Statuses Update",
+				"value": "Statuses Update",
+				"action": "Update status",
+				"description": "Update a status's name or color",
+				"routing": {
+					"request": {
+						"method": "PATCH",
+						"url": "=/statuses/{{$parameter[\"statusId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Statuses Delete",
+				"value": "Statuses Delete",
+				"action": "Delete status",
+				"description": "Delete a status. This will remove the status from all threads.",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/statuses/{{$parameter[\"statusId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Statuses Colors",
+				"value": "Statuses Colors",
+				"action": "List available colors",
+				"description": "Get a list of predefined colors that can be used when creating or updating statuses",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/statuses/colors"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Colors"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Colors List",
+				"value": "Colors List",
+				"action": "List available colors",
+				"description": "Get a list of predefined colors that can be used when creating or updating tags or statuses",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/colors"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Events"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Events List",
+				"value": "Events List",
+				"action": "List events",
+				"description": "List webhook events for replay. Events are stored for 7 days.",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/events"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "GET /team",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Teams"
+				],
+				"operation": [
+					"Team Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /threads",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Account Link Ids",
+		"name": "accountLinkIds",
+		"default": "[\n  null\n]",
+		"type": "json",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "accountLinkIds",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Cursor Id",
+		"name": "cursorId",
+		"description": "The ID of the thread to start pagination from. Must be used together with cursorTimestamp. Cannot be combined with the cursor object parameter.",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "cursorId",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Cursor Timestamp",
+		"name": "cursorTimestamp",
+		"description": "The timestamp of the thread to start pagination from. Must be used together with cursorId. Cannot be combined with the cursor object parameter.",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "cursorTimestamp",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Cursor",
+		"name": "cursor",
+		"description": "Pagination cursor using [bracket notation](https://docs.inboxapp.com/api-reference/introduction#encoding-objects-and-arrays-in-query-params). Omit to start from the beginning. Prefer using `cursorId` and `cursorTimestamp` instead for simpler query string encoding.",
+		"default": "{}",
+		"type": "json",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "cursor",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Inbox",
+		"name": "inbox",
+		"description": "Inbox view to filter threads. 'default' shows active threads, 'no-reply' shows threads awaiting response, 'requests' shows message requests, 'archived' shows archived threads.",
+		"default": "default",
+		"type": "options",
+		"options": [
+			{
+				"name": "Default",
+				"value": "default"
+			},
+			{
+				"name": "No Reply",
+				"value": "no-reply"
+			},
+			{
+				"name": "Requests",
+				"value": "requests"
+			},
+			{
+				"name": "Archived",
+				"value": "archived"
+			}
+		],
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "inbox",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Filters",
+		"name": "filters",
+		"default": "{\n  \"tags\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"statuses\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"assignees\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"campaigns\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"sortOrder\": \"desc\"\n}",
+		"type": "json",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "filters",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Limit",
+		"name": "limit",
+		"description": "Maximum number of threads to return per page. Defaults to 20, maximum 100.",
+		"default": 20,
+		"type": "number",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "limit",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /threads",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "External Platform Id",
+		"name": "externalPlatformId",
+		"type": "string",
+		"default": "",
+		"description": "The platform ID of the prospect. Must be provided if externalId is not provided.",
+		"routing": {
+			"send": {
+				"property": "externalPlatformId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "External Id",
+		"name": "externalId",
+		"type": "string",
+		"default": "",
+		"description": "The Inbox external ID of the prospect. Must be provided if externalPlatformId is not provided.",
+		"routing": {
+			"send": {
+				"property": "externalId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Create"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Account Link Id",
+		"name": "accountLinkId",
+		"type": "string",
+		"default": "",
+		"description": "The account link ID to associate with this thread. This determines which connected account the thread belongs to.",
+		"routing": {
+			"send": {
+				"property": "accountLinkId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /threads/lookup",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Lookup"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Account Link Id",
+		"name": "accountLinkId",
+		"required": true,
+		"description": "The account link ID associated with the thread.",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "accountLinkId",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Lookup"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "External Platform Id",
+		"name": "externalPlatformId",
+		"description": "The platform ID of the prospect. Must be provided if externalId is not provided.",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "externalPlatformId",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Lookup"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "External Id",
+		"name": "externalId",
+		"description": "The Inbox external ID of the prospect. Must be provided if externalPlatformId is not provided.",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "externalId",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Lookup"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /threads/lookup-by-username",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Lookup By Username"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Username",
+		"name": "username",
+		"required": true,
+		"description": "The exact platform username of the prospect (without the @ prefix).",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "username",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Lookup By Username"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Account Link Ids",
+		"name": "accountLinkIds",
+		"default": "[\n  null\n]",
+		"type": "json",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "accountLinkIds",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Lookup By Username"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /threads/{threadId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PATCH /threads/{threadId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Done",
+		"name": "done",
+		"type": "boolean",
+		"default": true,
+		"routing": {
+			"send": {
+				"property": "done",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Assignee Id",
+		"name": "assigneeId",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "assigneeId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "DELETE /threads/{threadId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /threads/{threadId}/typing",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Typing"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Typing"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PATCH /threads/{threadId}/settings",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Settings"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Settings"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Typing Indicators Enabled",
+		"name": "typingIndicatorsEnabled",
+		"type": "boolean",
+		"default": true,
+		"routing": {
+			"send": {
+				"property": "typingIndicatorsEnabled",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Settings"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /threads/{threadId}/messages",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"description": "The ID of the thread to list messages from.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Cursor Id",
+		"name": "cursorId",
+		"description": "The ID of the message to start pagination from. Must be used together with cursorTimestamp. Cannot be combined with the cursor object parameter.",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "cursorId",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Cursor Timestamp",
+		"name": "cursorTimestamp",
+		"description": "The timestamp of the message to start pagination from. Must be used together with cursorId. Cannot be combined with the cursor object parameter.",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "cursorTimestamp",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Cursor",
+		"name": "cursor",
+		"description": "Pagination cursor using [bracket notation](https://docs.inboxapp.com/api-reference/introduction#encoding-objects-and-arrays-in-query-params). Omit to start from the beginning. Prefer using `cursorId` and `cursorTimestamp` instead for simpler query string encoding.",
+		"default": "{}",
+		"type": "json",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "cursor",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Limit",
+		"name": "limit",
+		"description": "Maximum number of messages to return per page. Defaults to 50, maximum 100.",
+		"default": 50,
+		"type": "number",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "limit",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /threads/{threadId}/messages",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Create"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Content",
+		"name": "content",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "content",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Reply To Message Id",
+		"name": "replyToMessageId",
+		"type": "string",
+		"default": "",
+		"description": "The ID of the message to reply to.",
+		"routing": {
+			"send": {
+				"property": "replyToMessageId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PATCH /threads/{threadId}/messages/{messageId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Edit"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"description": "The ID of the thread containing the message.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Edit"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"description": "The ID of the message to edit.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Edit"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Content",
+		"name": "content",
+		"type": "string",
+		"default": "",
+		"description": "The new content for the message.",
+		"routing": {
+			"send": {
+				"property": "content",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Edit"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "DELETE /threads/{threadId}/messages/{messageId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"description": "The ID of the thread containing the message.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"description": "The ID of the message to delete.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Delete For All",
+		"name": "deleteForAll",
+		"type": "boolean",
+		"default": true,
+		"description": "Whether to delete the message for all participants or just for yourself. Defaults to true (delete for all).",
+		"routing": {
+			"send": {
+				"property": "deleteForAll",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /threads/{threadId}/messages/{messageId}/history",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message History"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"description": "The ID of the thread containing the message.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message History"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"description": "The ID of the message to get history for.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message History"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /threads/{threadId}/messages/{messageId}/reactions/reactions",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Reactions Add"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"description": "The ID of the thread containing the message.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Reactions Add"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"description": "The ID of the message to react to.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Reactions Add"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Emoji",
+		"name": "emoji",
+		"type": "string",
+		"default": "",
+		"description": "The emoji to react with.",
+		"routing": {
+			"send": {
+				"property": "emoji",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Reactions Add"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "DELETE /threads/{threadId}/messages/{messageId}/reactions/reactions",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Reactions Remove"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"description": "The ID of the thread containing the message.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Reactions Remove"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"description": "The ID of the message to remove the reaction from.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Reactions Remove"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Emoji",
+		"name": "emoji",
+		"type": "string",
+		"default": "",
+		"description": "The emoji reaction to remove.",
+		"routing": {
+			"send": {
+				"property": "emoji",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Reactions Remove"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /threads/messages",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Messages Quick Send"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "External Platform Id",
+		"name": "externalPlatformId",
+		"type": "string",
+		"default": "",
+		"description": "The platform ID of the prospect. Must be provided if `externalId` is not provided.",
+		"routing": {
+			"send": {
+				"property": "externalPlatformId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Messages Quick Send"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "External Id",
+		"name": "externalId",
+		"type": "string",
+		"default": "",
+		"description": "The Inbox external ID of the prospect. Must be provided if `externalPlatformId` is not provided.",
+		"routing": {
+			"send": {
+				"property": "externalId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Messages Quick Send"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Account Link Id",
+		"name": "accountLinkId",
+		"type": "string",
+		"default": "",
+		"description": "The account link ID to send the message from.",
+		"routing": {
+			"send": {
+				"property": "accountLinkId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Messages Quick Send"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Content",
+		"name": "content",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "content",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Messages Quick Send"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /account-links",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Account Links"
+				],
+				"operation": [
+					"Account Links List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /members",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Members"
+				],
+				"operation": [
+					"Members List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /members/{memberId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Members"
+				],
+				"operation": [
+					"Members Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Member Id",
+		"name": "memberId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Members"
+				],
+				"operation": [
+					"Members Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /prospects/{prospectId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Prospect Id",
+		"name": "prospectId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PATCH /prospects/{prospectId}/context",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Prospect Id",
+		"name": "prospectId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Notes",
+		"name": "notes",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "notes",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Valuation",
+		"name": "valuation",
+		"type": "number",
+		"default": 0,
+		"routing": {
+			"send": {
+				"property": "valuation",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Status Id",
+		"name": "statusId",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "statusId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Add Tags",
+		"name": "addTags",
+		"type": "json",
+		"default": "[\n  null\n]",
+		"routing": {
+			"send": {
+				"property": "addTags",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ JSON.parse($value) }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Remove Tags",
+		"name": "removeTags",
+		"type": "json",
+		"default": "[\n  null\n]",
+		"routing": {
+			"send": {
+				"property": "removeTags",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ JSON.parse($value) }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Assignee Id",
+		"name": "assigneeId",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "assigneeId",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Done",
+		"name": "done",
+		"type": "boolean",
+		"default": true,
+		"routing": {
+			"send": {
+				"property": "done",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /prospects/lookup",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Lookup"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Platform Id",
+		"name": "platformId",
+		"required": true,
+		"description": "The platform user ID (e.g., Twitter user ID).",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "platformId",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Lookup"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /tags",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /tags",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Create"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Name",
+		"name": "name",
+		"type": "string",
+		"default": "",
+		"description": "The name of the tag. Must be unique within the team. Maximum 255 characters.",
+		"routing": {
+			"send": {
+				"property": "name",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Color",
+		"name": "color",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "color",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /tags/{tagId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Tag Id",
+		"name": "tagId",
+		"required": true,
+		"description": "The ID of the tag to retrieve.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PATCH /tags/{tagId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Tag Id",
+		"name": "tagId",
+		"required": true,
+		"description": "The ID of the tag to update.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Name",
+		"name": "name",
+		"type": "string",
+		"default": "",
+		"description": "The new name for the tag. Must be unique within the team. Maximum 255 characters.",
+		"routing": {
+			"send": {
+				"property": "name",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Color",
+		"name": "color",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "color",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "DELETE /tags/{tagId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Tag Id",
+		"name": "tagId",
+		"required": true,
+		"description": "The ID of the tag to delete.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /tags/colors",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Colors"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /statuses",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /statuses",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Create"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Name",
+		"name": "name",
+		"type": "string",
+		"default": "",
+		"description": "The name of the status. Must be unique within the team. Maximum 255 characters.",
+		"routing": {
+			"send": {
+				"property": "name",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Color",
+		"name": "color",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "color",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Create"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /statuses/{statusId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Status Id",
+		"name": "statusId",
+		"required": true,
+		"description": "The ID of the status to retrieve.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PATCH /statuses/{statusId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Status Id",
+		"name": "statusId",
+		"required": true,
+		"description": "The ID of the status to update.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Name",
+		"name": "name",
+		"type": "string",
+		"default": "",
+		"description": "The new name for the status. Must be unique within the team. Maximum 255 characters.",
+		"routing": {
+			"send": {
+				"property": "name",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Color",
+		"name": "color",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "color",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "DELETE /statuses/{statusId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Status Id",
+		"name": "statusId",
+		"required": true,
+		"description": "The ID of the status to delete.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /statuses/colors",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Colors"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /colors",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Colors"
+				],
+				"operation": [
+					"Colors List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /events",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Events"
+				],
+				"operation": [
+					"Events List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "After Seq",
+		"name": "afterSeq",
+		"description": "Return events after this sequence number. Omit to start from the beginning.",
+		"default": 0,
+		"type": "number",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "afterSeq",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Events"
+				],
+				"operation": [
+					"Events List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Limit",
+		"name": "limit",
+		"description": "Maximum number of events to return. Defaults to 100, maximum 1000.",
+		"default": 100,
+		"type": "number",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "limit",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Events"
+				],
+				"operation": [
+					"Events List"
+				]
+			}
+		}
+	}
+]
