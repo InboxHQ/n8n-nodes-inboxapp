@@ -6,7 +6,7 @@ export class InboxApp implements INodeType {
 		displayName: 'InboxApp',
 		name: 'inboxApp',
 		icon: 'file:inboxapp.svg',
-		group: ['transform'],
+		group: ['output'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Manage X/Twitter DM conversations, prospects, threads, and messages with InboxApp',
@@ -14,8 +14,8 @@ export class InboxApp implements INodeType {
 			name: 'InboxApp',
 		},
 		usableAsTool: true,
-		inputs: ['main'],
-		outputs: ['main'],
+		inputs: [{ type: 'main' }],
+		outputs: [{ type: 'main' }],
 		credentials: [
 			{
 				name: 'inboxAppApi',
