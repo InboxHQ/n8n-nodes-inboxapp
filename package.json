@@ -13,7 +13,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/inboxhq/n8n-nodes-inboxapp.git"
+		"url": "https://github.com/InboxHQ/n8n-nodes-inboxapp.git"
 	},
 	"scripts": {
 		"generate": "node -e \"const{N8NPropertiesBuilder}=require('@devlikeapro/n8n-openapi-node');const d=require('./nodes/InboxApp/openapi.json');const p=new N8NPropertiesBuilder(d,{});require('fs').writeFileSync('./nodes/InboxApp/properties.json',JSON.stringify(p.build(),null,'\\t'))\" && node scripts/postprocess-properties.js && echo 'Properties generated'",
