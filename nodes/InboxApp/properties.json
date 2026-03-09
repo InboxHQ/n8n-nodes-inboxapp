@@ -675,304 +675,6 @@
 		"default": ""
 	},
 	{
-		"displayName": "GET /team",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Teams"
-				],
-				"operation": [
-					"Team Get"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /threads",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Account Link Ids",
-		"name": "accountLinkIds",
-		"default": "[\n  null\n]",
-		"type": "json",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "accountLinkIds",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Cursor Id",
-		"name": "cursorId",
-		"description": "The ID of the thread to start pagination from. Must be used together with cursorTimestamp. Cannot be combined with the cursor object parameter.",
-		"default": "",
-		"type": "string",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "cursorId",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Cursor Timestamp",
-		"name": "cursorTimestamp",
-		"description": "The timestamp of the thread to start pagination from. Must be used together with cursorId. Cannot be combined with the cursor object parameter.",
-		"default": "",
-		"type": "string",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "cursorTimestamp",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Cursor",
-		"name": "cursor",
-		"description": "Pagination cursor using [bracket notation](https://docs.inboxapp.com/api-reference/introduction#encoding-objects-and-arrays-in-query-params). Omit to start from the beginning. Prefer using `cursorId` and `cursorTimestamp` instead for simpler query string encoding.",
-		"default": "{}",
-		"type": "json",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "cursor",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Inbox",
-		"name": "inbox",
-		"description": "Inbox view to filter threads. 'default' shows active threads, 'no-reply' shows threads awaiting response, 'requests' shows message requests, 'archived' shows archived threads.",
-		"default": "default",
-		"type": "options",
-		"options": [
-			{
-				"name": "Default",
-				"value": "default"
-			},
-			{
-				"name": "No Reply",
-				"value": "no-reply"
-			},
-			{
-				"name": "Requests",
-				"value": "requests"
-			},
-			{
-				"name": "Archived",
-				"value": "archived"
-			}
-		],
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "inbox",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Filters",
-		"name": "filters",
-		"default": "{\n  \"tags\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"statuses\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"assignees\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"campaigns\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"sortOrder\": \"desc\"\n}",
-		"type": "json",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "filters",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Limit",
-		"name": "limit",
-		"description": "Maximum number of threads to return per page. Defaults to 20, maximum 100.",
-		"default": 20,
-		"type": "number",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "limit",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "POST /threads",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Create"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "External Platform Id",
-		"name": "externalPlatformId",
-		"type": "string",
-		"default": "",
-		"description": "The platform ID of the prospect. Must be provided if externalId is not provided.",
-		"routing": {
-			"send": {
-				"property": "externalPlatformId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Create"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "External Id",
-		"name": "externalId",
-		"type": "string",
-		"default": "",
-		"description": "The Inbox external ID of the prospect. Must be provided if externalPlatformId is not provided.",
-		"routing": {
-			"send": {
-				"property": "externalId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Create"
-				]
-			}
-		}
-	},
-	{
 		"required": true,
 		"displayName": "Account Link Id",
 		"name": "accountLinkId",
@@ -994,25 +696,6 @@
 				],
 				"operation": [
 					"Threads Create"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /threads/lookup",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Lookup"
 				]
 			}
 		}
@@ -1044,75 +727,6 @@
 		}
 	},
 	{
-		"displayName": "External Platform Id",
-		"name": "externalPlatformId",
-		"description": "The platform ID of the prospect. Must be provided if externalId is not provided.",
-		"default": "",
-		"type": "string",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "externalPlatformId",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Lookup"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "External Id",
-		"name": "externalId",
-		"description": "The Inbox external ID of the prospect. Must be provided if externalPlatformId is not provided.",
-		"default": "",
-		"type": "string",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "externalId",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Lookup"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /threads/lookup-by-username",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Lookup By Username"
-				]
-			}
-		}
-	},
-	{
 		"displayName": "Username",
 		"name": "username",
 		"required": true,
@@ -1139,37 +753,11 @@
 		}
 	},
 	{
-		"displayName": "Account Link Ids",
-		"name": "accountLinkIds",
-		"default": "[\n  null\n]",
-		"type": "json",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "accountLinkIds",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Lookup By Username"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /threads/{threadId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
 		"default": "",
+		"type": "string",
 		"displayOptions": {
 			"show": {
 				"resource": [
@@ -1193,25 +781,6 @@
 					"Threads"
 				],
 				"operation": [
-					"Threads Thread Get"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "PATCH /threads/{threadId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
 					"Threads Thread Update"
 				]
 			}
@@ -1223,73 +792,6 @@
 		"required": true,
 		"default": "",
 		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Done",
-		"name": "done",
-		"type": "boolean",
-		"default": true,
-		"routing": {
-			"send": {
-				"property": "done",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Assignee Id",
-		"name": "assigneeId",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "assigneeId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "DELETE /threads/{threadId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
 		"displayOptions": {
 			"show": {
 				"resource": [
@@ -1313,25 +815,6 @@
 					"Threads"
 				],
 				"operation": [
-					"Threads Thread Delete"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "POST /threads/{threadId}/typing",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
 					"Threads Thread Typing"
 				]
 			}
@@ -1349,86 +832,7 @@
 					"Threads"
 				],
 				"operation": [
-					"Threads Thread Typing"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "PATCH /threads/{threadId}/settings",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
 					"Threads Thread Settings"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Settings"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Typing Indicators Enabled",
-		"name": "typingIndicatorsEnabled",
-		"type": "boolean",
-		"default": true,
-		"routing": {
-			"send": {
-				"property": "typingIndicatorsEnabled",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Settings"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /threads/{threadId}/messages",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages List"
 				]
 			}
 		}
@@ -1447,125 +851,6 @@
 				],
 				"operation": [
 					"Threads Thread Messages List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Cursor Id",
-		"name": "cursorId",
-		"description": "The ID of the message to start pagination from. Must be used together with cursorTimestamp. Cannot be combined with the cursor object parameter.",
-		"default": "",
-		"type": "string",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "cursorId",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Cursor Timestamp",
-		"name": "cursorTimestamp",
-		"description": "The timestamp of the message to start pagination from. Must be used together with cursorId. Cannot be combined with the cursor object parameter.",
-		"default": "",
-		"type": "string",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "cursorTimestamp",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Cursor",
-		"name": "cursor",
-		"description": "Pagination cursor using [bracket notation](https://docs.inboxapp.com/api-reference/introduction#encoding-objects-and-arrays-in-query-params). Omit to start from the beginning. Prefer using `cursorId` and `cursorTimestamp` instead for simpler query string encoding.",
-		"default": "{}",
-		"type": "json",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "cursor",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Limit",
-		"name": "limit",
-		"description": "Maximum number of messages to return per page. Defaults to 50, maximum 100.",
-		"default": 50,
-		"type": "number",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "limit",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "POST /threads/{threadId}/messages",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Create"
 				]
 			}
 		}
@@ -1608,50 +893,6 @@
 				],
 				"operation": [
 					"Threads Thread Messages Create"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Reply To Message Id",
-		"name": "replyToMessageId",
-		"type": "string",
-		"default": "",
-		"description": "The ID of the message to reply to.",
-		"routing": {
-			"send": {
-				"property": "replyToMessageId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Create"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "PATCH /threads/{threadId}/messages/{messageId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Edit"
 				]
 			}
 		}
@@ -1719,25 +960,6 @@
 		}
 	},
 	{
-		"displayName": "DELETE /threads/{threadId}/messages/{messageId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Delete"
-				]
-			}
-		}
-	},
-	{
 		"displayName": "Thread Id",
 		"name": "threadId",
 		"required": true,
@@ -1774,50 +996,6 @@
 		}
 	},
 	{
-		"displayName": "Delete For All",
-		"name": "deleteForAll",
-		"type": "boolean",
-		"default": true,
-		"description": "Whether to delete the message for all participants or just for yourself. Defaults to true (delete for all).",
-		"routing": {
-			"send": {
-				"property": "deleteForAll",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Delete"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /threads/{threadId}/messages/{messageId}/history",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message History"
-				]
-			}
-		}
-	},
-	{
 		"displayName": "Thread Id",
 		"name": "threadId",
 		"required": true,
@@ -1849,25 +1027,6 @@
 				],
 				"operation": [
 					"Threads Thread Messages Message History"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "POST /threads/{threadId}/messages/{messageId}/reactions/reactions",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Reactions Add"
 				]
 			}
 		}
@@ -1935,25 +1094,6 @@
 		}
 	},
 	{
-		"displayName": "DELETE /threads/{threadId}/messages/{messageId}/reactions/reactions",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Reactions Remove"
-				]
-			}
-		}
-	},
-	{
 		"displayName": "Thread Id",
 		"name": "threadId",
 		"required": true,
@@ -2016,75 +1156,6 @@
 		}
 	},
 	{
-		"displayName": "POST /threads/messages",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Messages Quick Send"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "External Platform Id",
-		"name": "externalPlatformId",
-		"type": "string",
-		"default": "",
-		"description": "The platform ID of the prospect. Must be provided if `externalId` is not provided.",
-		"routing": {
-			"send": {
-				"property": "externalPlatformId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Messages Quick Send"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "External Id",
-		"name": "externalId",
-		"type": "string",
-		"default": "",
-		"description": "The Inbox external ID of the prospect. Must be provided if `externalPlatformId` is not provided.",
-		"routing": {
-			"send": {
-				"property": "externalId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Messages Quick Send"
-				]
-			}
-		}
-	},
-	{
 		"required": true,
 		"displayName": "Account Link Id",
 		"name": "accountLinkId",
@@ -2136,63 +1207,6 @@
 		}
 	},
 	{
-		"displayName": "GET /account-links",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Account Links"
-				],
-				"operation": [
-					"Account Links List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /members",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Members"
-				],
-				"operation": [
-					"Members List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /members/{memberId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Members"
-				],
-				"operation": [
-					"Members Get"
-				]
-			}
-		}
-	},
-	{
 		"displayName": "Member Id",
 		"name": "memberId",
 		"required": true,
@@ -2210,13 +1224,11 @@
 		}
 	},
 	{
-		"displayName": "GET /prospects/{prospectId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
+		"displayName": "Prospect Id",
+		"name": "prospectId",
+		"required": true,
 		"default": "",
+		"type": "string",
 		"displayOptions": {
 			"show": {
 				"resource": [
@@ -2240,230 +1252,7 @@
 					"Prospects"
 				],
 				"operation": [
-					"Prospects Get"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "PATCH /prospects/{prospectId}/context",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
 					"Prospects Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Prospect Id",
-		"name": "prospectId",
-		"required": true,
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Notes",
-		"name": "notes",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "notes",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Valuation",
-		"name": "valuation",
-		"type": "number",
-		"default": 0,
-		"routing": {
-			"send": {
-				"property": "valuation",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Status Id",
-		"name": "statusId",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "statusId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Add Tags",
-		"name": "addTags",
-		"type": "json",
-		"default": "[\n  null\n]",
-		"routing": {
-			"send": {
-				"property": "addTags",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ JSON.parse($value) }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Remove Tags",
-		"name": "removeTags",
-		"type": "json",
-		"default": "[\n  null\n]",
-		"routing": {
-			"send": {
-				"property": "removeTags",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ JSON.parse($value) }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Assignee Id",
-		"name": "assigneeId",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "assigneeId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Done",
-		"name": "done",
-		"type": "boolean",
-		"default": true,
-		"routing": {
-			"send": {
-				"property": "done",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /prospects/lookup",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Lookup"
 				]
 			}
 		}
@@ -2495,44 +1284,6 @@
 		}
 	},
 	{
-		"displayName": "GET /tags",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Tags"
-				],
-				"operation": [
-					"Tags List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "POST /tags",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Tags"
-				],
-				"operation": [
-					"Tags Create"
-				]
-			}
-		}
-	},
-	{
 		"required": true,
 		"displayName": "Name",
 		"name": "name",
@@ -2559,49 +1310,6 @@
 		}
 	},
 	{
-		"displayName": "Color",
-		"name": "color",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "color",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Tags"
-				],
-				"operation": [
-					"Tags Create"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /tags/{tagId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Tags"
-				],
-				"operation": [
-					"Tags Get"
-				]
-			}
-		}
-	},
-	{
 		"displayName": "Tag Id",
 		"name": "tagId",
 		"required": true,
@@ -2615,25 +1323,6 @@
 				],
 				"operation": [
 					"Tags Get"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "PATCH /tags/{tagId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Tags"
-				],
-				"operation": [
-					"Tags Update"
 				]
 			}
 		}
@@ -2657,74 +1346,6 @@
 		}
 	},
 	{
-		"displayName": "Name",
-		"name": "name",
-		"type": "string",
-		"default": "",
-		"description": "The new name for the tag. Must be unique within the team. Maximum 255 characters.",
-		"routing": {
-			"send": {
-				"property": "name",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Tags"
-				],
-				"operation": [
-					"Tags Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Color",
-		"name": "color",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "color",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Tags"
-				],
-				"operation": [
-					"Tags Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "DELETE /tags/{tagId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Tags"
-				],
-				"operation": [
-					"Tags Delete"
-				]
-			}
-		}
-	},
-	{
 		"displayName": "Tag Id",
 		"name": "tagId",
 		"required": true,
@@ -2738,63 +1359,6 @@
 				],
 				"operation": [
 					"Tags Delete"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /tags/colors",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Tags"
-				],
-				"operation": [
-					"Tags Colors"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /statuses",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Statuses"
-				],
-				"operation": [
-					"Statuses List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "POST /statuses",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Statuses"
-				],
-				"operation": [
-					"Statuses Create"
 				]
 			}
 		}
@@ -2826,49 +1390,6 @@
 		}
 	},
 	{
-		"displayName": "Color",
-		"name": "color",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "color",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Statuses"
-				],
-				"operation": [
-					"Statuses Create"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "GET /statuses/{statusId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Statuses"
-				],
-				"operation": [
-					"Statuses Get"
-				]
-			}
-		}
-	},
-	{
 		"displayName": "Status Id",
 		"name": "statusId",
 		"required": true,
@@ -2882,25 +1403,6 @@
 				],
 				"operation": [
 					"Statuses Get"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "PATCH /statuses/{statusId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Statuses"
-				],
-				"operation": [
-					"Statuses Update"
 				]
 			}
 		}
@@ -2924,74 +1426,6 @@
 		}
 	},
 	{
-		"displayName": "Name",
-		"name": "name",
-		"type": "string",
-		"default": "",
-		"description": "The new name for the status. Must be unique within the team. Maximum 255 characters.",
-		"routing": {
-			"send": {
-				"property": "name",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Statuses"
-				],
-				"operation": [
-					"Statuses Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Color",
-		"name": "color",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "color",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Statuses"
-				],
-				"operation": [
-					"Statuses Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "DELETE /statuses/{statusId}",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Statuses"
-				],
-				"operation": [
-					"Statuses Delete"
-				]
-			}
-		}
-	},
-	{
 		"displayName": "Status Id",
 		"name": "statusId",
 		"required": true,
@@ -3010,101 +1444,837 @@
 		}
 	},
 	{
-		"displayName": "GET /statuses/colors",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
 		},
-		"default": "",
+		"options": [
+			{
+				"displayName": "Account Link Ids",
+				"name": "accountLinkIds",
+				"default": "[\n  null\n]",
+				"type": "json",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "accountLinkIds",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Cursor Id",
+				"name": "cursorId",
+				"description": "The ID of the thread to start pagination from. Must be used together with cursorTimestamp. Cannot be combined with the cursor object parameter.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursorId",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Cursor Timestamp",
+				"name": "cursorTimestamp",
+				"description": "The timestamp of the thread to start pagination from. Must be used together with cursorId. Cannot be combined with the cursor object parameter.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursorTimestamp",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Cursor",
+				"name": "cursor",
+				"description": "Pagination cursor using [bracket notation](https://docs.inboxapp.com/api-reference/introduction#encoding-objects-and-arrays-in-query-params). Omit to start from the beginning. Prefer using `cursorId` and `cursorTimestamp` instead for simpler query string encoding.",
+				"default": "{}",
+				"type": "json",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursor",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Inbox",
+				"name": "inbox",
+				"description": "Inbox view to filter threads. 'default' shows active threads, 'no-reply' shows threads awaiting response, 'requests' shows message requests, 'archived' shows archived threads.",
+				"default": "default",
+				"type": "options",
+				"options": [
+					{
+						"name": "Default",
+						"value": "default"
+					},
+					{
+						"name": "No Reply",
+						"value": "no-reply"
+					},
+					{
+						"name": "Requests",
+						"value": "requests"
+					},
+					{
+						"name": "Archived",
+						"value": "archived"
+					}
+				],
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "inbox",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Filters",
+				"name": "filters",
+				"default": "{\n  \"tags\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"statuses\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"assignees\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"campaigns\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"sortOrder\": \"desc\"\n}",
+				"type": "json",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "filters",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Limit",
+				"name": "limit",
+				"description": "Maximum number of threads to return per page. Defaults to 20, maximum 100.",
+				"default": 20,
+				"type": "number",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "limit",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Create"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "External Platform Id",
+				"name": "externalPlatformId",
+				"type": "string",
+				"default": "",
+				"description": "The platform ID of the prospect. Must be provided if externalId is not provided.",
+				"routing": {
+					"send": {
+						"property": "externalPlatformId",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			},
+			{
+				"displayName": "External Id",
+				"name": "externalId",
+				"type": "string",
+				"default": "",
+				"description": "The Inbox external ID of the prospect. Must be provided if externalPlatformId is not provided.",
+				"routing": {
+					"send": {
+						"property": "externalId",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Lookup"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "External Platform Id",
+				"name": "externalPlatformId",
+				"description": "The platform ID of the prospect. Must be provided if externalId is not provided.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "externalPlatformId",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "External Id",
+				"name": "externalId",
+				"description": "The Inbox external ID of the prospect. Must be provided if externalPlatformId is not provided.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "externalId",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Lookup By Username"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Account Link Ids",
+				"name": "accountLinkIds",
+				"default": "[\n  null\n]",
+				"type": "json",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "accountLinkIds",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Update"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Done",
+				"name": "done",
+				"type": "boolean",
+				"default": true,
+				"routing": {
+					"send": {
+						"property": "done",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			},
+			{
+				"displayName": "Assignee Id",
+				"name": "assigneeId",
+				"type": "string",
+				"default": "",
+				"routing": {
+					"send": {
+						"property": "assigneeId",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Thread Settings"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Typing Indicators Enabled",
+				"name": "typingIndicatorsEnabled",
+				"type": "boolean",
+				"default": true,
+				"routing": {
+					"send": {
+						"property": "typingIndicatorsEnabled",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages List"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Cursor Id",
+				"name": "cursorId",
+				"description": "The ID of the message to start pagination from. Must be used together with cursorTimestamp. Cannot be combined with the cursor object parameter.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursorId",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Cursor Timestamp",
+				"name": "cursorTimestamp",
+				"description": "The timestamp of the message to start pagination from. Must be used together with cursorId. Cannot be combined with the cursor object parameter.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursorTimestamp",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Cursor",
+				"name": "cursor",
+				"description": "Pagination cursor using [bracket notation](https://docs.inboxapp.com/api-reference/introduction#encoding-objects-and-arrays-in-query-params). Omit to start from the beginning. Prefer using `cursorId` and `cursorTimestamp` instead for simpler query string encoding.",
+				"default": "{}",
+				"type": "json",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursor",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Limit",
+				"name": "limit",
+				"description": "Maximum number of messages to return per page. Defaults to 50, maximum 100.",
+				"default": 50,
+				"type": "number",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "limit",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Create"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Reply To Message Id",
+				"name": "replyToMessageId",
+				"type": "string",
+				"default": "",
+				"description": "The ID of the message to reply to.",
+				"routing": {
+					"send": {
+						"property": "replyToMessageId",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Thread Messages Message Delete"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Delete For All",
+				"name": "deleteForAll",
+				"type": "boolean",
+				"default": true,
+				"description": "Whether to delete the message for all participants or just for yourself. Defaults to true (delete for all).",
+				"routing": {
+					"send": {
+						"property": "deleteForAll",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Threads Messages Quick Send"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "External Platform Id",
+				"name": "externalPlatformId",
+				"type": "string",
+				"default": "",
+				"description": "The platform ID of the prospect. Must be provided if `externalId` is not provided.",
+				"routing": {
+					"send": {
+						"property": "externalPlatformId",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			},
+			{
+				"displayName": "External Id",
+				"name": "externalId",
+				"type": "string",
+				"default": "",
+				"description": "The Inbox external ID of the prospect. Must be provided if `externalPlatformId` is not provided.",
+				"routing": {
+					"send": {
+						"property": "externalId",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Prospects"
+				],
+				"operation": [
+					"Prospects Update"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Notes",
+				"name": "notes",
+				"type": "string",
+				"default": "",
+				"routing": {
+					"send": {
+						"property": "notes",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			},
+			{
+				"displayName": "Valuation",
+				"name": "valuation",
+				"type": "number",
+				"default": 0,
+				"routing": {
+					"send": {
+						"property": "valuation",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			},
+			{
+				"displayName": "Status Id",
+				"name": "statusId",
+				"type": "string",
+				"default": "",
+				"routing": {
+					"send": {
+						"property": "statusId",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			},
+			{
+				"displayName": "Add Tags",
+				"name": "addTags",
+				"type": "json",
+				"default": "[\n  null\n]",
+				"routing": {
+					"send": {
+						"property": "addTags",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ JSON.parse($value) }}"
+					}
+				}
+			},
+			{
+				"displayName": "Remove Tags",
+				"name": "removeTags",
+				"type": "json",
+				"default": "[\n  null\n]",
+				"routing": {
+					"send": {
+						"property": "removeTags",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ JSON.parse($value) }}"
+					}
+				}
+			},
+			{
+				"displayName": "Assignee Id",
+				"name": "assigneeId",
+				"type": "string",
+				"default": "",
+				"routing": {
+					"send": {
+						"property": "assigneeId",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			},
+			{
+				"displayName": "Done",
+				"name": "done",
+				"type": "boolean",
+				"default": true,
+				"routing": {
+					"send": {
+						"property": "done",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Create"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Color",
+				"name": "color",
+				"type": "string",
+				"default": "",
+				"routing": {
+					"send": {
+						"property": "color",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Update"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Name",
+				"name": "name",
+				"type": "string",
+				"default": "",
+				"description": "The new name for the tag. Must be unique within the team. Maximum 255 characters.",
+				"routing": {
+					"send": {
+						"property": "name",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			},
+			{
+				"displayName": "Color",
+				"name": "color",
+				"type": "string",
+				"default": "",
+				"routing": {
+					"send": {
+						"property": "color",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
 		"displayOptions": {
 			"show": {
 				"resource": [
 					"Statuses"
 				],
 				"operation": [
-					"Statuses Colors"
+					"Statuses Create"
 				]
 			}
-		}
+		},
+		"options": [
+			{
+				"displayName": "Color",
+				"name": "color",
+				"type": "string",
+				"default": "",
+				"routing": {
+					"send": {
+						"property": "color",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
 	},
 	{
-		"displayName": "GET /colors",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Colors"
+					"Statuses"
 				],
 				"operation": [
-					"Colors List"
+					"Statuses Update"
 				]
 			}
-		}
+		},
+		"options": [
+			{
+				"displayName": "Name",
+				"name": "name",
+				"type": "string",
+				"default": "",
+				"description": "The new name for the status. Must be unique within the team. Maximum 255 characters.",
+				"routing": {
+					"send": {
+						"property": "name",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			},
+			{
+				"displayName": "Color",
+				"name": "color",
+				"type": "string",
+				"default": "",
+				"routing": {
+					"send": {
+						"property": "color",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
 	},
 	{
-		"displayName": "GET /events",
-		"name": "operation",
-		"type": "notice",
-		"typeOptions": {
-			"theme": "info"
-		},
-		"default": "",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Events"
-				],
-				"operation": [
-					"Events List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "After Seq",
-		"name": "afterSeq",
-		"description": "Return events after this sequence number. Omit to start from the beginning.",
-		"default": 0,
-		"type": "number",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "afterSeq",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Events"
-				],
-				"operation": [
-					"Events List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Limit",
-		"name": "limit",
-		"description": "Maximum number of events to return. Defaults to 100, maximum 1000.",
-		"default": 100,
-		"type": "number",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "limit",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
-		},
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
 		"displayOptions": {
 			"show": {
 				"resource": [
@@ -3114,6 +2284,38 @@
 					"Events List"
 				]
 			}
-		}
+		},
+		"options": [
+			{
+				"displayName": "After Seq",
+				"name": "afterSeq",
+				"description": "Return events after this sequence number. Omit to start from the beginning.",
+				"default": 0,
+				"type": "number",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "afterSeq",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Limit",
+				"name": "limit",
+				"description": "Maximum number of events to return. Defaults to 100, maximum 1000.",
+				"default": 100,
+				"type": "number",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "limit",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			}
+		]
 	}
 ]

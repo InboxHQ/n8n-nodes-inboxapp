@@ -1,6 +1,6 @@
 {
 	"name": "@inboxapp/n8n-nodes-inboxapp",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "n8n community node for InboxApp - Social Selling CRM for X",
 	"license": "MIT",
 	"homepage": "https://inboxapp.com",
@@ -16,7 +16,7 @@
 		"url": "https://github.com/inboxhq/n8n-nodes-inboxapp.git"
 	},
 	"scripts": {
-		"generate": "node -e \"const{N8NPropertiesBuilder}=require('@devlikeapro/n8n-openapi-node');const d=require('./nodes/InboxApp/openapi.json');const p=new N8NPropertiesBuilder(d,{});require('fs').writeFileSync('./nodes/InboxApp/properties.json',JSON.stringify(p.build(),null,'\\t'))\" && echo 'Properties generated'",
+		"generate": "node -e \"const{N8NPropertiesBuilder}=require('@devlikeapro/n8n-openapi-node');const d=require('./nodes/InboxApp/openapi.json');const p=new N8NPropertiesBuilder(d,{});require('fs').writeFileSync('./nodes/InboxApp/properties.json',JSON.stringify(p.build(),null,'\\t'))\" && node scripts/postprocess-properties.js && echo 'Properties generated'",
 		"build": "n8n-node build",
 		"build:watch": "tsc --watch",
 		"dev": "n8n-node dev",
