@@ -6,8 +6,8 @@ on:
       - 'v*'
 
 permissions:
-  id-token: write
   contents: read
+  id-token: write
 
 jobs:
   publish:
@@ -18,10 +18,7 @@ jobs:
         with:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install -g npm@latest
-      - run: |
-          npm config delete //registry.npmjs.org/:_authToken || true
-          npm config list
+      - run: npm --version
       - run: npm ci
       - run: npm run build
       - run: npm publish --provenance --access public
