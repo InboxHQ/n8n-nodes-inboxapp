@@ -133,12 +133,12 @@ This replaces hours of manual DMing with a fully automated pipeline.
 
 ## API Docs
 
-Full API documentation: [inboxapp.com/docs/api](https://inboxapp.com/docs/api)
+Full API documentation: [docs.inboxapp.com](https://docs.inboxapp.com)
 
 ## Links
 
 - 🌐 [InboxApp](https://inboxapp.com)
-- 📖 [API Documentation](https://inboxapp.com/docs/api)
+- 📖 [API Documentation](https://docs.inboxapp.com)
 - 🐛 [Report Issues](https://github.com/inboxhq/n8n-nodes-inboxapp/issues)
 - 💬 [n8n Community](https://community.n8n.io/)
 
