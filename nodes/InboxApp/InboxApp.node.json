@@ -3,10 +3,6 @@
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Sales", "Communication"],
-	"subcategories": {
-		"Sales": ["CRM"],
-		"Communication": ["Social Media"]
-	},
 	"alias": ["inbox", "twitter", "x", "dm", "prospect", "thread", "message"],
 	"resources": {
 		"credentialDocumentation": [
