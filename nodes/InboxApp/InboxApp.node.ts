@@ -9,7 +9,7 @@ export class InboxApp implements INodeType {
 		group: ['output'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Manage X/Twitter DM conversations, prospects, threads, and messages with InboxApp',
+		description: 'Manage conversations, contacts, threads, and messages with InboxApp',
 		defaults: {
 			name: 'InboxApp',
 		},
@@ -27,7 +27,8 @@ export class InboxApp implements INodeType {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
 			},
-			baseURL: 'https://inboxapp.com/api/v1',
+			baseURL: 'https://inboxapp.com/api/v2',
+			arrayFormat: 'repeat',
 		},
 		properties: properties as unknown as INodeProperties[],
 	};

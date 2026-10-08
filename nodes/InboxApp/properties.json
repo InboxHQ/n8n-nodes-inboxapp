@@ -6,54 +6,54 @@
 		"noDataExpression": true,
 		"options": [
 			{
-				"name": "Teams",
-				"value": "Teams",
-				"description": "Teams are shared workspace for members to view and manage account links, tags, statuses, campaigns, conversations, and more."
+				"name": "Platforms",
+				"value": "Platforms",
+				"description": "The messaging platforms available to the team, with what each one supports."
 			},
 			{
-				"name": "Threads",
-				"value": "Threads",
-				"description": "\nThreads represent conversations between an account linked to your team and a prospect on Twitter.\n            "
-			},
-			{
-				"name": "Messages",
-				"value": "Messages",
-				"description": "\nMessages are the individual messages sent in a thread.\n            "
+				"name": "Team",
+				"value": "Team",
+				"description": "The team the API token belongs to, and its members: the Inboxapp users who work in it."
 			},
 			{
 				"name": "Account Links",
 				"value": "Account Links",
-				"description": "\nAccount links represent X accounts connected to your team.\n            "
+				"description": "Platform accounts the team connected to Inboxapp. Every thread belongs to one, and messages are sent from one."
 			},
 			{
-				"name": "Members",
-				"value": "Members",
-				"description": "\nMembers are Inbox users who can access the team.\n            "
+				"name": "Contacts",
+				"value": "Contacts",
+				"description": "The team's record of a person, holding its CRM state: status, tags, notes, valuation and default assignee. A contact groups one or more profiles, a person's accounts on the platforms."
 			},
 			{
-				"name": "Prospects",
-				"value": "Prospects",
-				"description": "\nProspects represent external profiles on X.\n            "
+				"name": "Threads",
+				"value": "Threads",
+				"description": "Conversations between one of the team's account links and one profile."
+			},
+			{
+				"name": "Messages",
+				"value": "Messages",
+				"description": "Messages in a thread, and sending, editing, unsending and reacting to them on the platform."
 			},
 			{
 				"name": "Tags",
 				"value": "Tags",
-				"description": "\nTags are labels for prospects.\n            "
+				"description": "Labels the team puts on contacts."
 			},
 			{
 				"name": "Statuses",
 				"value": "Statuses",
-				"description": "\nStatuses are used to track the deal stage or any fixed state for a prospect.\n            "
+				"description": "The pipeline stages a contact can be in, such as a deal stage. A contact has at most one."
 			},
 			{
 				"name": "Colors",
 				"value": "Colors",
-				"description": "\nGet predefined color options that can be used when creating or updating tags and statuses.\n            "
+				"description": "The colors of Inboxapp's palette, for tags and statuses."
 			},
 			{
 				"name": "Events",
 				"value": "Events",
-				"description": ""
+				"description": "Changes in the team, as delivered to v2 webhooks. Each event names the object that changed and carries only the values of the change; read the object for its current state. Events are kept for 7 days, up to 25,000 per team."
 			}
 		],
 		"default": ""
@@ -66,7 +66,35 @@
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Teams"
+					"Platforms"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Platforms List",
+				"value": "Platforms List",
+				"action": "List platforms",
+				"description": "Each platform's capabilities and limits. An account link's `capabilities` can only narrow its platform's.",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/platforms"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Team"
 				]
 			}
 		},
@@ -75,247 +103,35 @@
 				"name": "Team Get",
 				"value": "Team Get",
 				"action": "Get team",
-				"description": "Get the team associated with the supplied API token.",
+				"description": "Get team",
 				"routing": {
 					"request": {
 						"method": "GET",
 						"url": "=/team"
 					}
 				}
-			}
-		],
-		"default": ""
-	},
-	{
-		"displayName": "Operation",
-		"name": "operation",
-		"type": "options",
-		"noDataExpression": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				]
-			}
-		},
-		"options": [
+			},
 			{
-				"name": "Threads List",
-				"value": "Threads List",
-				"action": "List threads",
-				"description": "List threads ordered by recency with advanced filtering",
+				"name": "Team List Members",
+				"value": "Team List Members",
+				"action": "List members",
+				"description": "List members",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/threads"
+						"url": "=/members"
 					}
 				}
 			},
 			{
-				"name": "Threads Create",
-				"value": "Threads Create",
-				"action": "Create thread",
-				"description": "Create a new active thread with a prospect",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/threads"
-					}
-				}
-			},
-			{
-				"name": "Threads Lookup",
-				"value": "Threads Lookup",
-				"action": "Lookup thread",
-				"description": "Find a thread by account link ID and external identifier (platform ID or external ID)",
+				"name": "Team Get Member",
+				"value": "Team Get Member",
+				"action": "Get member",
+				"description": "Get member",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/threads/lookup"
-					}
-				}
-			},
-			{
-				"name": "Threads Lookup By Username",
-				"value": "Threads Lookup By Username",
-				"action": "Lookup threads by username",
-				"description": "Find all threads for a prospect by their exact platform username. Returns threads across all account links.",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/threads/lookup-by-username"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Get",
-				"value": "Threads Thread Get",
-				"action": "Get thread",
-				"description": "Get details of a specific thread",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Update",
-				"value": "Threads Thread Update",
-				"action": "Update thread",
-				"description": "Mark a thread done or change assignee",
-				"routing": {
-					"request": {
-						"method": "PATCH",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Delete",
-				"value": "Threads Thread Delete",
-				"action": "Delete thread",
-				"description": "Soft delete a thread",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Typing",
-				"value": "Threads Thread Typing",
-				"action": "Send typing indicator",
-				"description": "Sends a typing indicator to the external party in the thread. Only supported for X Chat (encrypted) threads.",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}/typing"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Settings",
-				"value": "Threads Thread Settings",
-				"action": "Update thread settings",
-				"description": "Update settings for a specific thread",
-				"routing": {
-					"request": {
-						"method": "PATCH",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}/settings"
-					}
-				}
-			}
-		],
-		"default": ""
-	},
-	{
-		"displayName": "Operation",
-		"name": "operation",
-		"type": "options",
-		"noDataExpression": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				]
-			}
-		},
-		"options": [
-			{
-				"name": "Threads Thread Messages List",
-				"value": "Threads Thread Messages List",
-				"action": "List messages",
-				"description": "List messages in a thread with pagination support",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Messages Create",
-				"value": "Threads Thread Messages Create",
-				"action": "Send message",
-				"description": "Send a message in a thread",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Messages Message Edit",
-				"value": "Threads Thread Messages Message Edit",
-				"action": "Edit message",
-				"description": "Edit a message in a thread. Only works for X Chat (encrypted DM) threads.",
-				"routing": {
-					"request": {
-						"method": "PATCH",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Messages Message Delete",
-				"value": "Threads Thread Messages Message Delete",
-				"action": "Delete message",
-				"description": "Delete a message in a thread. Only works for X Chat (encrypted DM) threads.",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Messages Message History",
-				"value": "Threads Thread Messages Message History",
-				"action": "Get message history",
-				"description": "Get the edit history and deletion status of a message. Returns all versions of the message content over time.",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}/history"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Messages Message Reactions Add",
-				"value": "Threads Thread Messages Message Reactions Add",
-				"action": "Add reaction",
-				"description": "Add a reaction to a message. Only works for non-sandbox threads.",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}/reactions/reactions"
-					}
-				}
-			},
-			{
-				"name": "Threads Thread Messages Message Reactions Remove",
-				"value": "Threads Thread Messages Message Reactions Remove",
-				"action": "Remove reaction",
-				"description": "Remove a reaction from a message. Only works for non-sandbox threads.",
-				"routing": {
-					"request": {
-						"method": "DELETE",
-						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages/{{$parameter[\"messageId\"]}}/reactions/reactions"
-					}
-				}
-			},
-			{
-				"name": "Threads Messages Quick Send",
-				"value": "Threads Messages Quick Send",
-				"action": "Quick send message",
-				"description": "Send a message without knowing the thread ID ahead of time. Automatically creates a thread if needed.",
-				"routing": {
-					"request": {
-						"method": "POST",
-						"url": "=/threads/messages"
+						"url": "=/members/{{$parameter[\"memberId\"]}}"
 					}
 				}
 			}
@@ -339,51 +155,23 @@
 				"name": "Account Links List",
 				"value": "Account Links List",
 				"action": "List account links",
-				"description": "List all account links for the team",
+				"description": "List account links",
 				"routing": {
 					"request": {
 						"method": "GET",
 						"url": "=/account-links"
 					}
 				}
-			}
-		],
-		"default": ""
-	},
-	{
-		"displayName": "Operation",
-		"name": "operation",
-		"type": "options",
-		"noDataExpression": true,
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Members"
-				]
-			}
-		},
-		"options": [
-			{
-				"name": "Members List",
-				"value": "Members List",
-				"action": "List members",
-				"description": "List all members of the team",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/members"
-					}
-				}
 			},
 			{
-				"name": "Members Get",
-				"value": "Members Get",
-				"action": "Get member",
-				"description": "Get details of a specific member",
+				"name": "Account Links Get",
+				"value": "Account Links Get",
+				"action": "Get account link",
+				"description": "Get account link",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/members/{{$parameter[\"memberId\"]}}"
+						"url": "=/account-links/{{$parameter[\"accountLinkId\"]}}"
 					}
 				}
 			}
@@ -398,44 +186,268 @@
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Prospects"
+					"Contacts"
 				]
 			}
 		},
 		"options": [
 			{
-				"name": "Prospects Get",
-				"value": "Prospects Get",
-				"action": "Get prospect",
-				"description": "Get details of a specific prospect",
+				"name": "Contacts List",
+				"value": "Contacts List",
+				"action": "Find contacts",
+				"description": "Finds contacts by the platform identity of one of their profiles: a `platform` with `platformId` or `username`.",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/prospects/{{$parameter[\"prospectId\"]}}"
+						"url": "=/contacts"
 					}
 				}
 			},
 			{
-				"name": "Prospects Update",
-				"value": "Prospects Update",
-				"action": "Update prospect context",
-				"description": "Update context of a specific prospect",
+				"name": "Contacts Get",
+				"value": "Contacts Get",
+				"action": "Get contact",
+				"description": "Get contact",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/contacts/{{$parameter[\"contactId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Contacts Update",
+				"value": "Contacts Update",
+				"action": "Update contact",
+				"description": "Update contact",
 				"routing": {
 					"request": {
 						"method": "PATCH",
-						"url": "=/prospects/{{$parameter[\"prospectId\"]}}/context"
+						"url": "=/contacts/{{$parameter[\"contactId\"]}}"
 					}
 				}
 			},
 			{
-				"name": "Prospects Lookup",
-				"value": "Prospects Lookup",
-				"action": "Lookup prospect",
-				"description": "Find an Inbox prospect by platform ID. Note that not all of Twitter is included here. A separate search API will be available for profiles not in our CRM later.",
+				"name": "Contacts Add Tag",
+				"value": "Contacts Add Tag",
+				"action": "Add tag to contact",
+				"description": "Adding a tag the contact already has succeeds.",
+				"routing": {
+					"request": {
+						"method": "PUT",
+						"url": "=/contacts/{{$parameter[\"contactId\"]}}/tags/{{$parameter[\"tagRef\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Contacts Remove Tag",
+				"value": "Contacts Remove Tag",
+				"action": "Remove tag from contact",
+				"description": "Removing a tag the contact doesn't have succeeds.",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/contacts/{{$parameter[\"contactId\"]}}/tags/{{$parameter[\"tagRef\"]}}"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Threads List",
+				"value": "Threads List",
+				"action": "List threads",
+				"description": "Threads in inbox order, filtered by folder and by contact CRM state.",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/prospects/lookup"
+						"url": "=/threads"
+					}
+				}
+			},
+			{
+				"name": "Threads Get",
+				"value": "Threads Get",
+				"action": "Get thread",
+				"description": "Get thread",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Threads Update",
+				"value": "Threads Update",
+				"action": "Update thread",
+				"description": "Update thread",
+				"routing": {
+					"request": {
+						"method": "PATCH",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Threads Delete",
+				"value": "Threads Delete",
+				"action": "Delete thread",
+				"description": "Deletes the conversation on the platform when it can, and always in Inboxapp. The response's `scope` says which happened.",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Threads Typing",
+				"value": "Threads Typing",
+				"action": "Send typing indicator",
+				"description": "Shows the account link as typing in the conversation. At most one per thread every 2.5 seconds; extra calls return `skipped`.",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/typing"
+					}
+				}
+			}
+		],
+		"default": ""
+	},
+	{
+		"displayName": "Operation",
+		"name": "operation",
+		"type": "options",
+		"noDataExpression": true,
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				]
+			}
+		},
+		"options": [
+			{
+				"name": "Messages List",
+				"value": "Messages List",
+				"action": "List messages",
+				"description": "List messages",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/threads/{{$parameter[\"threadId\"]}}/messages"
+					}
+				}
+			},
+			{
+				"name": "Messages Get",
+				"value": "Messages Get",
+				"action": "Get message",
+				"description": "Get message",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/messages/{{$parameter[\"messageId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Messages Edit",
+				"value": "Messages Edit",
+				"action": "Edit message",
+				"description": "Edits the message on the platform. Needs `message:edit`, within the platform's edit window.",
+				"routing": {
+					"request": {
+						"method": "PATCH",
+						"url": "=/messages/{{$parameter[\"messageId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Messages Unsend",
+				"value": "Messages Unsend",
+				"action": "Delete message",
+				"description": "Delete message",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/messages/{{$parameter[\"messageId\"]}}"
+					}
+				}
+			},
+			{
+				"name": "Messages Send",
+				"value": "Messages Send",
+				"action": "Send message",
+				"description": "`201` for a new send. A replay of an `Idempotency-Key` returns the original result with `200`.",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/messages"
+					}
+				}
+			},
+			{
+				"name": "Messages History",
+				"value": "Messages History",
+				"action": "Get message history",
+				"description": "Every version of the message's content, from its edits.",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/messages/{{$parameter[\"messageId\"]}}/history"
+					}
+				}
+			},
+			{
+				"name": "Messages React",
+				"value": "Messages React",
+				"action": "Add reaction",
+				"description": "Add reaction",
+				"routing": {
+					"request": {
+						"method": "POST",
+						"url": "=/messages/{{$parameter[\"messageId\"]}}/reactions"
+					}
+				}
+			},
+			{
+				"name": "Messages Unreact",
+				"value": "Messages Unreact",
+				"action": "Remove reaction",
+				"description": "Remove reaction",
+				"routing": {
+					"request": {
+						"method": "DELETE",
+						"url": "=/messages/{{$parameter[\"messageId\"]}}/reactions"
+					}
+				}
+			},
+			{
+				"name": "Messages Attachment",
+				"value": "Messages Attachment",
+				"action": "Get attachment",
+				"description": "`200` with a fresh URL once ready, `202` while the media is pending or processing. A card index is `invalidRequest`.",
+				"routing": {
+					"request": {
+						"method": "GET",
+						"url": "=/messages/{{$parameter[\"messageId\"]}}/attachments/{{$parameter[\"index\"]}}"
 					}
 				}
 			}
@@ -459,7 +471,7 @@
 				"name": "Tags List",
 				"value": "Tags List",
 				"action": "List tags",
-				"description": "List all tags in the team",
+				"description": "List tags",
 				"routing": {
 					"request": {
 						"method": "GET",
@@ -471,7 +483,7 @@
 				"name": "Tags Create",
 				"value": "Tags Create",
 				"action": "Create tag",
-				"description": "Create a new tag for organizing threads and prospects",
+				"description": "Create tag",
 				"routing": {
 					"request": {
 						"method": "POST",
@@ -483,11 +495,11 @@
 				"name": "Tags Get",
 				"value": "Tags Get",
 				"action": "Get tag",
-				"description": "Get details of a specific tag",
+				"description": "Get tag",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/tags/{{$parameter[\"tagId\"]}}"
+						"url": "=/tags/{{$parameter[\"tagRef\"]}}"
 					}
 				}
 			},
@@ -495,11 +507,11 @@
 				"name": "Tags Update",
 				"value": "Tags Update",
 				"action": "Update tag",
-				"description": "Update a tag's name or color",
+				"description": "Update tag",
 				"routing": {
 					"request": {
 						"method": "PATCH",
-						"url": "=/tags/{{$parameter[\"tagId\"]}}"
+						"url": "=/tags/{{$parameter[\"tagRef\"]}}"
 					}
 				}
 			},
@@ -507,23 +519,11 @@
 				"name": "Tags Delete",
 				"value": "Tags Delete",
 				"action": "Delete tag",
-				"description": "Delete a tag. This will remove the tag from all threads and prospects.",
+				"description": "Also removes it from every contact.",
 				"routing": {
 					"request": {
 						"method": "DELETE",
-						"url": "=/tags/{{$parameter[\"tagId\"]}}"
-					}
-				}
-			},
-			{
-				"name": "Tags Colors",
-				"value": "Tags Colors",
-				"action": "List available colors",
-				"description": "Get a list of predefined colors that can be used when creating or updating tags",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/tags/colors"
+						"url": "=/tags/{{$parameter[\"tagRef\"]}}"
 					}
 				}
 			}
@@ -547,7 +547,7 @@
 				"name": "Statuses List",
 				"value": "Statuses List",
 				"action": "List statuses",
-				"description": "List all statuses in the team",
+				"description": "List statuses",
 				"routing": {
 					"request": {
 						"method": "GET",
@@ -559,7 +559,7 @@
 				"name": "Statuses Create",
 				"value": "Statuses Create",
 				"action": "Create status",
-				"description": "Create a new status to track leads through your sales pipeline",
+				"description": "Create status",
 				"routing": {
 					"request": {
 						"method": "POST",
@@ -571,11 +571,11 @@
 				"name": "Statuses Get",
 				"value": "Statuses Get",
 				"action": "Get status",
-				"description": "Get details of a specific status",
+				"description": "Get status",
 				"routing": {
 					"request": {
 						"method": "GET",
-						"url": "=/statuses/{{$parameter[\"statusId\"]}}"
+						"url": "=/statuses/{{$parameter[\"statusRef\"]}}"
 					}
 				}
 			},
@@ -583,11 +583,11 @@
 				"name": "Statuses Update",
 				"value": "Statuses Update",
 				"action": "Update status",
-				"description": "Update a status's name or color",
+				"description": "Update status",
 				"routing": {
 					"request": {
 						"method": "PATCH",
-						"url": "=/statuses/{{$parameter[\"statusId\"]}}"
+						"url": "=/statuses/{{$parameter[\"statusRef\"]}}"
 					}
 				}
 			},
@@ -595,23 +595,11 @@
 				"name": "Statuses Delete",
 				"value": "Statuses Delete",
 				"action": "Delete status",
-				"description": "Delete a status. This will remove the status from all threads.",
+				"description": "Delete status",
 				"routing": {
 					"request": {
 						"method": "DELETE",
-						"url": "=/statuses/{{$parameter[\"statusId\"]}}"
-					}
-				}
-			},
-			{
-				"name": "Statuses Colors",
-				"value": "Statuses Colors",
-				"action": "List available colors",
-				"description": "Get a list of predefined colors that can be used when creating or updating statuses",
-				"routing": {
-					"request": {
-						"method": "GET",
-						"url": "=/statuses/colors"
+						"url": "=/statuses/{{$parameter[\"statusRef\"]}}"
 					}
 				}
 			}
@@ -634,8 +622,8 @@
 			{
 				"name": "Colors List",
 				"value": "Colors List",
-				"action": "List available colors",
-				"description": "Get a list of predefined colors that can be used when creating or updating tags or statuses",
+				"action": "List colors",
+				"description": "List colors",
 				"routing": {
 					"request": {
 						"method": "GET",
@@ -662,8 +650,8 @@
 			{
 				"name": "Events List",
 				"value": "Events List",
-				"action": "List events",
-				"description": "List webhook events for replay. Events are stored for 7 days.",
+				"action": "Replay events",
+				"description": "Reads events in sequence order. A page can hold fewer than `limit` events when some are filtered out; continue from `lastSeq` while `hasMore` is true.",
 				"routing": {
 					"request": {
 						"method": "GET",
@@ -675,533 +663,77 @@
 		"default": ""
 	},
 	{
-		"required": true,
-		"displayName": "Account Link Id",
-		"name": "accountLinkId",
-		"type": "string",
-		"default": "",
-		"description": "The account link ID to associate with this thread. This determines which connected account the thread belongs to.",
-		"routing": {
-			"send": {
-				"property": "accountLinkId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
+		"displayName": "GET /platforms",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
 		},
+		"default": "",
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Threads"
+					"Platforms"
 				],
 				"operation": [
-					"Threads Create"
+					"Platforms List"
 				]
 			}
 		}
 	},
 	{
-		"displayName": "Account Link Id",
-		"name": "accountLinkId",
-		"required": true,
-		"description": "The account link ID associated with the thread.",
-		"default": "",
-		"type": "string",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "accountLinkId",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
+		"displayName": "GET /team",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
 		},
+		"default": "",
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Threads"
+					"Team"
 				],
 				"operation": [
-					"Threads Lookup"
+					"Team Get"
 				]
 			}
 		}
 	},
 	{
-		"displayName": "Username",
-		"name": "username",
-		"required": true,
-		"description": "The exact platform username of the prospect (without the @ prefix).",
-		"default": "",
-		"type": "string",
-		"routing": {
-			"send": {
-				"type": "query",
-				"property": "username",
-				"value": "={{ $value }}",
-				"propertyInDotNotation": false
-			}
+		"displayName": "GET /members",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
 		},
+		"default": "",
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Threads"
+					"Team"
 				],
 				"operation": [
-					"Threads Lookup By Username"
+					"Team List Members"
 				]
 			}
 		}
 	},
 	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Get"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Update"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Delete"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Typing"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Settings"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"description": "The ID of the thread to list messages from.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages List"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Create"
-				]
-			}
-		}
-	},
-	{
-		"required": true,
-		"displayName": "Content",
-		"name": "content",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "content",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
+		"displayName": "GET /members/{memberId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
 		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Create"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"description": "The ID of the thread containing the message.",
 		"default": "",
-		"type": "string",
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Messages"
+					"Team"
 				],
 				"operation": [
-					"Threads Thread Messages Message Edit"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Message Id",
-		"name": "messageId",
-		"required": true,
-		"description": "The ID of the message to edit.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Edit"
-				]
-			}
-		}
-	},
-	{
-		"required": true,
-		"displayName": "Content",
-		"name": "content",
-		"type": "string",
-		"default": "",
-		"description": "The new content for the message.",
-		"routing": {
-			"send": {
-				"property": "content",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Edit"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"description": "The ID of the thread containing the message.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Delete"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Message Id",
-		"name": "messageId",
-		"required": true,
-		"description": "The ID of the message to delete.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Delete"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"description": "The ID of the thread containing the message.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message History"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Message Id",
-		"name": "messageId",
-		"required": true,
-		"description": "The ID of the message to get history for.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message History"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"description": "The ID of the thread containing the message.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Reactions Add"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Message Id",
-		"name": "messageId",
-		"required": true,
-		"description": "The ID of the message to react to.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Reactions Add"
-				]
-			}
-		}
-	},
-	{
-		"required": true,
-		"displayName": "Emoji",
-		"name": "emoji",
-		"type": "string",
-		"default": "",
-		"description": "The emoji to react with.",
-		"routing": {
-			"send": {
-				"property": "emoji",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Reactions Add"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Thread Id",
-		"name": "threadId",
-		"required": true,
-		"description": "The ID of the thread containing the message.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Reactions Remove"
-				]
-			}
-		}
-	},
-	{
-		"displayName": "Message Id",
-		"name": "messageId",
-		"required": true,
-		"description": "The ID of the message to remove the reaction from.",
-		"default": "",
-		"type": "string",
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Reactions Remove"
-				]
-			}
-		}
-	},
-	{
-		"required": true,
-		"displayName": "Emoji",
-		"name": "emoji",
-		"type": "string",
-		"default": "",
-		"description": "The emoji reaction to remove.",
-		"routing": {
-			"send": {
-				"property": "emoji",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Message Reactions Remove"
-				]
-			}
-		}
-	},
-	{
-		"required": true,
-		"displayName": "Account Link Id",
-		"name": "accountLinkId",
-		"type": "string",
-		"default": "",
-		"description": "The account link ID to send the message from.",
-		"routing": {
-			"send": {
-				"property": "accountLinkId",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Messages Quick Send"
-				]
-			}
-		}
-	},
-	{
-		"required": true,
-		"displayName": "Content",
-		"name": "content",
-		"type": "string",
-		"default": "",
-		"routing": {
-			"send": {
-				"property": "content",
-				"propertyInDotNotation": false,
-				"type": "body",
-				"value": "={{ $value }}"
-			}
-		},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Messages Quick Send"
+					"Team Get Member"
 				]
 			}
 		}
@@ -1215,59 +747,99 @@
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Members"
+					"Team"
 				],
 				"operation": [
-					"Members Get"
+					"Team Get Member"
 				]
 			}
 		}
 	},
 	{
-		"displayName": "Prospect Id",
-		"name": "prospectId",
+		"displayName": "GET /account-links",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Account Links"
+				],
+				"operation": [
+					"Account Links List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /account-links/{accountLinkId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Account Links"
+				],
+				"operation": [
+					"Account Links Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Account Link Id",
+		"name": "accountLinkId",
 		"required": true,
 		"default": "",
 		"type": "string",
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Prospects"
+					"Account Links"
 				],
 				"operation": [
-					"Prospects Get"
+					"Account Links Get"
 				]
 			}
 		}
 	},
 	{
-		"displayName": "Prospect Id",
-		"name": "prospectId",
-		"required": true,
+		"displayName": "GET /contacts",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
 		"default": "",
-		"type": "string",
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Prospects"
+					"Contacts"
 				],
 				"operation": [
-					"Prospects Update"
+					"Contacts List"
 				]
 			}
 		}
 	},
 	{
-		"displayName": "Platform Id",
-		"name": "platformId",
+		"displayName": "Platform",
+		"name": "platform",
 		"required": true,
-		"description": "The platform user ID (e.g., Twitter user ID).",
+		"description": "The platform. Every team can use twitter; a team may have others enabled.",
 		"default": "",
 		"type": "string",
 		"routing": {
 			"send": {
 				"type": "query",
-				"property": "platformId",
+				"property": "platform",
 				"value": "={{ $value }}",
 				"propertyInDotNotation": false
 			}
@@ -1275,10 +847,880 @@
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Prospects"
+					"Contacts"
 				],
 				"operation": [
-					"Prospects Lookup"
+					"Contacts List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /contacts/{contactId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Contact Id",
+		"name": "contactId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PATCH /contacts/{contactId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Contact Id",
+		"name": "contactId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PUT /contacts/{contactId}/tags/{tagRef}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Add Tag"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Contact Id",
+		"name": "contactId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Add Tag"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Tag Ref",
+		"name": "tagRef",
+		"required": true,
+		"description": "A tag, by ID or by name. Names match ignoring case and accents. When a value is one tag's ID and another's name, the ID wins.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Add Tag"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "DELETE /contacts/{contactId}/tags/{tagRef}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Remove Tag"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Contact Id",
+		"name": "contactId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Remove Tag"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Tag Ref",
+		"name": "tagRef",
+		"required": true,
+		"description": "A tag, by ID or by name. Names match ignoring case and accents. When a value is one tag's ID and another's name, the ID wins.",
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Remove Tag"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /threads",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /threads/{threadId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PATCH /threads/{threadId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "DELETE /threads/{threadId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /threads/{threadId}/typing",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Typing"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Typing"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /threads/{threadId}/messages",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Thread Id",
+		"name": "threadId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /messages/{messageId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "PATCH /messages/{messageId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Edit"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Edit"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Content",
+		"name": "content",
+		"type": "string",
+		"default": "",
+		"routing": {
+			"send": {
+				"property": "content",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Edit"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "DELETE /messages/{messageId}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Unsend"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Unsend"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Scope",
+		"name": "scope",
+		"required": true,
+		"description": "`self` deletes for the account link only, which needs `message:delete:self`. `all` unsends for every participant, which needs `message:unsend`.",
+		"default": "self",
+		"type": "options",
+		"options": [
+			{
+				"name": "Self",
+				"value": "self"
+			},
+			{
+				"name": "All",
+				"value": "all"
+			}
+		],
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "scope",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Unsend"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /messages",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Send"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Target",
+		"name": "target",
+		"type": "json",
+		"default": "{\n  \"type\": \"thread\",\n  \"threadId\": \"\"\n}",
+		"description": "One of: {\"type\":\"thread\",\"threadId\":\"\"}, {\"type\":\"contact\",\"accountLinkId\":\"\",\"contactId\":\"\"}, {\"type\":\"profile\",\"accountLinkId\":\"\",\"platform\":\"\",\"platformId\":\"\"}",
+		"routing": {
+			"send": {
+				"property": "target",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ JSON.parse($value) }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Send"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Content",
+		"name": "content",
+		"type": "string",
+		"default": "",
+		"description": "Up to the platform's `limits.characters`. Longer content fails with `contentRejected`.",
+		"routing": {
+			"send": {
+				"property": "content",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Send"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /messages/{messageId}/history",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages History"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages History"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /messages/{messageId}/reactions",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages React"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages React"
+				]
+			}
+		}
+	},
+	{
+		"required": true,
+		"displayName": "Emoji",
+		"name": "emoji",
+		"type": "string",
+		"default": "",
+		"description": "Exactly one emoji.",
+		"routing": {
+			"send": {
+				"property": "emoji",
+				"propertyInDotNotation": false,
+				"type": "body",
+				"value": "={{ $value }}"
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages React"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "DELETE /messages/{messageId}/reactions",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Unreact"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Unreact"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Emoji",
+		"name": "emoji",
+		"required": true,
+		"description": "Exactly one emoji.",
+		"default": "",
+		"type": "string",
+		"routing": {
+			"send": {
+				"type": "query",
+				"property": "emoji",
+				"value": "={{ $value }}",
+				"propertyInDotNotation": false
+			}
+		},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Unreact"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /messages/{messageId}/attachments/{index}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Attachment"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Message Id",
+		"name": "messageId",
+		"required": true,
+		"default": "",
+		"type": "string",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Attachment"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Index",
+		"name": "index",
+		"required": true,
+		"default": 0,
+		"type": "number",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Attachment"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /tags",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /tags",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Create"
 				]
 			}
 		}
@@ -1289,7 +1731,6 @@
 		"name": "name",
 		"type": "string",
 		"default": "",
-		"description": "The name of the tag. Must be unique within the team. Maximum 255 characters.",
 		"routing": {
 			"send": {
 				"property": "name",
@@ -1310,10 +1751,29 @@
 		}
 	},
 	{
-		"displayName": "Tag Id",
-		"name": "tagId",
+		"displayName": "GET /tags/{tagRef}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Tag Ref",
+		"name": "tagRef",
 		"required": true,
-		"description": "The ID of the tag to retrieve.",
+		"description": "A tag, by ID or by name. Names match ignoring case and accents. When a value is one tag's ID and another's name, the ID wins.",
 		"default": "",
 		"type": "string",
 		"displayOptions": {
@@ -1328,10 +1788,29 @@
 		}
 	},
 	{
-		"displayName": "Tag Id",
-		"name": "tagId",
+		"displayName": "PATCH /tags/{tagRef}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Tag Ref",
+		"name": "tagRef",
 		"required": true,
-		"description": "The ID of the tag to update.",
+		"description": "A tag, by ID or by name. Names match ignoring case and accents. When a value is one tag's ID and another's name, the ID wins.",
 		"default": "",
 		"type": "string",
 		"displayOptions": {
@@ -1346,10 +1825,29 @@
 		}
 	},
 	{
-		"displayName": "Tag Id",
-		"name": "tagId",
+		"displayName": "DELETE /tags/{tagRef}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Tags"
+				],
+				"operation": [
+					"Tags Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Tag Ref",
+		"name": "tagRef",
 		"required": true,
-		"description": "The ID of the tag to delete.",
+		"description": "A tag, by ID or by name. Names match ignoring case and accents. When a value is one tag's ID and another's name, the ID wins.",
 		"default": "",
 		"type": "string",
 		"displayOptions": {
@@ -1364,12 +1862,49 @@
 		}
 	},
 	{
+		"displayName": "GET /statuses",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "POST /statuses",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Create"
+				]
+			}
+		}
+	},
+	{
 		"required": true,
 		"displayName": "Name",
 		"name": "name",
 		"type": "string",
 		"default": "",
-		"description": "The name of the status. Must be unique within the team. Maximum 255 characters.",
 		"routing": {
 			"send": {
 				"property": "name",
@@ -1390,10 +1925,29 @@
 		}
 	},
 	{
-		"displayName": "Status Id",
-		"name": "statusId",
+		"displayName": "GET /statuses/{statusRef}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Get"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Status Ref",
+		"name": "statusRef",
 		"required": true,
-		"description": "The ID of the status to retrieve.",
+		"description": "A status, by ID or by name. Names match ignoring case and accents. When a value is one status's ID and another's name, the ID wins.",
 		"default": "",
 		"type": "string",
 		"displayOptions": {
@@ -1408,10 +1962,29 @@
 		}
 	},
 	{
-		"displayName": "Status Id",
-		"name": "statusId",
+		"displayName": "PATCH /statuses/{statusRef}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Update"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Status Ref",
+		"name": "statusRef",
 		"required": true,
-		"description": "The ID of the status to update.",
+		"description": "A status, by ID or by name. Names match ignoring case and accents. When a value is one status's ID and another's name, the ID wins.",
 		"default": "",
 		"type": "string",
 		"displayOptions": {
@@ -1426,10 +1999,29 @@
 		}
 	},
 	{
-		"displayName": "Status Id",
-		"name": "statusId",
+		"displayName": "DELETE /statuses/{statusRef}",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Statuses"
+				],
+				"operation": [
+					"Statuses Delete"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "Status Ref",
+		"name": "statusRef",
 		"required": true,
-		"description": "The ID of the status to delete.",
+		"description": "A status, by ID or by name. Names match ignoring case and accents. When a value is one status's ID and another's name, the ID wins.",
 		"default": "",
 		"type": "string",
 		"displayOptions": {
@@ -1444,6 +2036,44 @@
 		}
 	},
 	{
+		"displayName": "GET /colors",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Colors"
+				],
+				"operation": [
+					"Colors List"
+				]
+			}
+		}
+	},
+	{
+		"displayName": "GET /events",
+		"name": "operation",
+		"type": "notice",
+		"typeOptions": {
+			"theme": "info"
+		},
+		"default": "",
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Events"
+				],
+				"operation": [
+					"Events List"
+				]
+			}
+		}
+	},
+	{
 		"displayName": "Additional Fields",
 		"name": "additionalFields",
 		"type": "collection",
@@ -1452,414 +2082,18 @@
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Threads"
+					"Team"
 				],
 				"operation": [
-					"Threads List"
+					"Team List Members"
 				]
 			}
 		},
 		"options": [
-			{
-				"displayName": "Account Link Ids",
-				"name": "accountLinkIds",
-				"default": "[\n  null\n]",
-				"type": "json",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "accountLinkIds",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
-			{
-				"displayName": "Cursor Id",
-				"name": "cursorId",
-				"description": "The ID of the thread to start pagination from. Must be used together with cursorTimestamp. Cannot be combined with the cursor object parameter.",
-				"default": "",
-				"type": "string",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "cursorId",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
-			{
-				"displayName": "Cursor Timestamp",
-				"name": "cursorTimestamp",
-				"description": "The timestamp of the thread to start pagination from. Must be used together with cursorId. Cannot be combined with the cursor object parameter.",
-				"default": "",
-				"type": "string",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "cursorTimestamp",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
-			{
-				"displayName": "Cursor",
-				"name": "cursor",
-				"description": "Pagination cursor using [bracket notation](https://docs.inboxapp.com/api-reference/introduction#encoding-objects-and-arrays-in-query-params). Omit to start from the beginning. Prefer using `cursorId` and `cursorTimestamp` instead for simpler query string encoding.",
-				"default": "{}",
-				"type": "json",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "cursor",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
-			{
-				"displayName": "Inbox",
-				"name": "inbox",
-				"description": "Inbox view to filter threads. 'default' shows active threads, 'no-reply' shows threads awaiting response, 'requests' shows message requests, 'archived' shows archived threads.",
-				"default": "default",
-				"type": "options",
-				"options": [
-					{
-						"name": "Default",
-						"value": "default"
-					},
-					{
-						"name": "No Reply",
-						"value": "no-reply"
-					},
-					{
-						"name": "Requests",
-						"value": "requests"
-					},
-					{
-						"name": "Archived",
-						"value": "archived"
-					}
-				],
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "inbox",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
-			{
-				"displayName": "Filters",
-				"name": "filters",
-				"default": "{\n  \"tags\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"statuses\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"assignees\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"campaigns\": {\n    \"selectedIds\": [\n      null\n    ]\n  },\n  \"sortOrder\": \"desc\"\n}",
-				"type": "json",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "filters",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
 			{
 				"displayName": "Limit",
 				"name": "limit",
-				"description": "Maximum number of threads to return per page. Defaults to 20, maximum 100.",
-				"default": 20,
-				"type": "number",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "limit",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			}
-		]
-	},
-	{
-		"displayName": "Additional Fields",
-		"name": "additionalFields",
-		"type": "collection",
-		"placeholder": "Add Field",
-		"default": {},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Create"
-				]
-			}
-		},
-		"options": [
-			{
-				"displayName": "External Platform Id",
-				"name": "externalPlatformId",
-				"type": "string",
-				"default": "",
-				"description": "The platform ID of the prospect. Must be provided if externalId is not provided.",
-				"routing": {
-					"send": {
-						"property": "externalPlatformId",
-						"propertyInDotNotation": false,
-						"type": "body",
-						"value": "={{ $value }}"
-					}
-				}
-			},
-			{
-				"displayName": "External Id",
-				"name": "externalId",
-				"type": "string",
-				"default": "",
-				"description": "The Inbox external ID of the prospect. Must be provided if externalPlatformId is not provided.",
-				"routing": {
-					"send": {
-						"property": "externalId",
-						"propertyInDotNotation": false,
-						"type": "body",
-						"value": "={{ $value }}"
-					}
-				}
-			}
-		]
-	},
-	{
-		"displayName": "Additional Fields",
-		"name": "additionalFields",
-		"type": "collection",
-		"placeholder": "Add Field",
-		"default": {},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Lookup"
-				]
-			}
-		},
-		"options": [
-			{
-				"displayName": "External Platform Id",
-				"name": "externalPlatformId",
-				"description": "The platform ID of the prospect. Must be provided if externalId is not provided.",
-				"default": "",
-				"type": "string",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "externalPlatformId",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
-			{
-				"displayName": "External Id",
-				"name": "externalId",
-				"description": "The Inbox external ID of the prospect. Must be provided if externalPlatformId is not provided.",
-				"default": "",
-				"type": "string",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "externalId",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			}
-		]
-	},
-	{
-		"displayName": "Additional Fields",
-		"name": "additionalFields",
-		"type": "collection",
-		"placeholder": "Add Field",
-		"default": {},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Lookup By Username"
-				]
-			}
-		},
-		"options": [
-			{
-				"displayName": "Account Link Ids",
-				"name": "accountLinkIds",
-				"default": "[\n  null\n]",
-				"type": "json",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "accountLinkIds",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			}
-		]
-	},
-	{
-		"displayName": "Additional Fields",
-		"name": "additionalFields",
-		"type": "collection",
-		"placeholder": "Add Field",
-		"default": {},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Update"
-				]
-			}
-		},
-		"options": [
-			{
-				"displayName": "Done",
-				"name": "done",
-				"type": "boolean",
-				"default": true,
-				"routing": {
-					"send": {
-						"property": "done",
-						"propertyInDotNotation": false,
-						"type": "body",
-						"value": "={{ $value }}"
-					}
-				}
-			},
-			{
-				"displayName": "Assignee Id",
-				"name": "assigneeId",
-				"type": "string",
-				"default": "",
-				"routing": {
-					"send": {
-						"property": "assigneeId",
-						"propertyInDotNotation": false,
-						"type": "body",
-						"value": "={{ $value }}"
-					}
-				}
-			}
-		]
-	},
-	{
-		"displayName": "Additional Fields",
-		"name": "additionalFields",
-		"type": "collection",
-		"placeholder": "Add Field",
-		"default": {},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Threads"
-				],
-				"operation": [
-					"Threads Thread Settings"
-				]
-			}
-		},
-		"options": [
-			{
-				"displayName": "Typing Indicators Enabled",
-				"name": "typingIndicatorsEnabled",
-				"type": "boolean",
-				"default": true,
-				"routing": {
-					"send": {
-						"property": "typingIndicatorsEnabled",
-						"propertyInDotNotation": false,
-						"type": "body",
-						"value": "={{ $value }}"
-					}
-				}
-			}
-		]
-	},
-	{
-		"displayName": "Additional Fields",
-		"name": "additionalFields",
-		"type": "collection",
-		"placeholder": "Add Field",
-		"default": {},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages List"
-				]
-			}
-		},
-		"options": [
-			{
-				"displayName": "Cursor Id",
-				"name": "cursorId",
-				"description": "The ID of the message to start pagination from. Must be used together with cursorTimestamp. Cannot be combined with the cursor object parameter.",
-				"default": "",
-				"type": "string",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "cursorId",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
-			{
-				"displayName": "Cursor Timestamp",
-				"name": "cursorTimestamp",
-				"description": "The timestamp of the message to start pagination from. Must be used together with cursorId. Cannot be combined with the cursor object parameter.",
-				"default": "",
-				"type": "string",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "cursorTimestamp",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
-			{
-				"displayName": "Cursor",
-				"name": "cursor",
-				"description": "Pagination cursor using [bracket notation](https://docs.inboxapp.com/api-reference/introduction#encoding-objects-and-arrays-in-query-params). Omit to start from the beginning. Prefer using `cursorId` and `cursorTimestamp` instead for simpler query string encoding.",
-				"default": "{}",
-				"type": "json",
-				"routing": {
-					"send": {
-						"type": "query",
-						"property": "cursor",
-						"value": "={{ $value }}",
-						"propertyInDotNotation": false
-					}
-				}
-			},
-			{
-				"displayName": "Limit",
-				"name": "limit",
-				"description": "Maximum number of messages to return per page. Defaults to 50, maximum 100.",
+				"description": "Page size, from 1 to 100. Defaults to 50.",
 				"default": 50,
 				"type": "number",
 				"routing": {
@@ -1869,39 +2103,24 @@
 						"value": "={{ $value }}",
 						"propertyInDotNotation": false
 					}
+				},
+				"typeOptions": {
+					"minValue": 1,
+					"maxValue": 100
 				}
-			}
-		]
-	},
-	{
-		"displayName": "Additional Fields",
-		"name": "additionalFields",
-		"type": "collection",
-		"placeholder": "Add Field",
-		"default": {},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Messages"
-				],
-				"operation": [
-					"Threads Thread Messages Create"
-				]
-			}
-		},
-		"options": [
+			},
 			{
-				"displayName": "Reply To Message Id",
-				"name": "replyToMessageId",
-				"type": "string",
+				"displayName": "Cursor",
+				"name": "cursor",
+				"description": "The previous page's `nextCursor`. Opaque, and valid only with the filters it was issued for.",
 				"default": "",
-				"description": "The ID of the message to reply to.",
+				"type": "string",
 				"routing": {
 					"send": {
-						"property": "replyToMessageId",
-						"propertyInDotNotation": false,
-						"type": "body",
-						"value": "={{ $value }}"
+						"type": "query",
+						"property": "cursor",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
 					}
 				}
 			}
@@ -1916,26 +2135,92 @@
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Messages"
+					"Account Links"
 				],
 				"operation": [
-					"Threads Thread Messages Message Delete"
+					"Account Links List"
 				]
 			}
 		},
 		"options": [
 			{
-				"displayName": "Delete For All",
-				"name": "deleteForAll",
-				"type": "boolean",
-				"default": true,
-				"description": "Whether to delete the message for all participants or just for yourself. Defaults to true (delete for all).",
+				"displayName": "Platform",
+				"name": "platform",
+				"description": "Add several to match any of them.",
+				"default": [],
+				"type": "string",
 				"routing": {
 					"send": {
-						"property": "deleteForAll",
-						"propertyInDotNotation": false,
-						"type": "body",
-						"value": "={{ $value }}"
+						"type": "query",
+						"property": "platform",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Status",
+				"name": "status",
+				"description": "Add several to match any of them.",
+				"default": [],
+				"type": "multiOptions",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "status",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"options": [
+					{
+						"name": "Active",
+						"value": "active"
+					},
+					{
+						"name": "Offline",
+						"value": "offline"
+					},
+					{
+						"name": "Paused",
+						"value": "paused"
+					}
+				]
+			},
+			{
+				"displayName": "Limit",
+				"name": "limit",
+				"description": "Page size, from 1 to 100. Defaults to 50.",
+				"default": 50,
+				"type": "number",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "limit",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"minValue": 1,
+					"maxValue": 100
+				}
+			},
+			{
+				"displayName": "Cursor",
+				"name": "cursor",
+				"description": "The previous page's `nextCursor`. Opaque, and valid only with the filters it was issued for.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursor",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
 					}
 				}
 			}
@@ -1950,63 +2235,195 @@
 		"displayOptions": {
 			"show": {
 				"resource": [
-					"Messages"
+					"Contacts"
 				],
 				"operation": [
-					"Threads Messages Quick Send"
+					"Contacts List"
 				]
 			}
 		},
 		"options": [
 			{
-				"displayName": "External Platform Id",
-				"name": "externalPlatformId",
+				"displayName": "Platform Id",
+				"name": "platformId",
+				"description": "Contacts with a profile of this platform ID. Give this or the other identity filter, adding up to 100. No match is an empty page.",
+				"default": [],
 				"type": "string",
-				"default": "",
-				"description": "The platform ID of the prospect. Must be provided if `externalId` is not provided.",
 				"routing": {
 					"send": {
-						"property": "externalPlatformId",
+						"type": "query",
+						"property": "platformId",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Username",
+				"name": "username",
+				"description": "Contacts with a profile of this username, without its display prefix. One username may match several contacts. Give this or the other identity filter, adding up to 100. No match is an empty page.",
+				"default": [],
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "username",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Expand",
+				"name": "expand",
+				"description": "Related resources to embed next to their ID field, one path per key, at most 4.",
+				"default": [],
+				"type": "multiOptions",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "expand",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"options": [
+					{
+						"name": "Status",
+						"value": "status"
+					},
+					{
+						"name": "Tags",
+						"value": "tags"
+					},
+					{
+						"name": "Assignee",
+						"value": "assignee"
+					}
+				]
+			},
+			{
+				"displayName": "Limit",
+				"name": "limit",
+				"description": "Page size, from 1 to 100. Defaults to 50.",
+				"default": 50,
+				"type": "number",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "limit",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"minValue": 1,
+					"maxValue": 100
+				}
+			},
+			{
+				"displayName": "Cursor",
+				"name": "cursor",
+				"description": "The previous page's `nextCursor`. Opaque, and valid only with the filters it was issued for.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursor",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Get"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Expand",
+				"name": "expand",
+				"description": "Related resources to embed next to their ID field, one path per key, at most 4.",
+				"default": [],
+				"type": "multiOptions",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "expand",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"options": [
+					{
+						"name": "Status",
+						"value": "status"
+					},
+					{
+						"name": "Tags",
+						"value": "tags"
+					},
+					{
+						"name": "Assignee",
+						"value": "assignee"
+					}
+				]
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Contacts"
+				],
+				"operation": [
+					"Contacts Update"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Status",
+				"name": "status",
+				"type": "string",
+				"default": "",
+				"description": "A status, by ID or by name. Names match ignoring case and accents. When a value is one status's ID and another's name, the ID wins.",
+				"routing": {
+					"send": {
+						"property": "status",
 						"propertyInDotNotation": false,
 						"type": "body",
 						"value": "={{ $value }}"
 					}
 				}
 			},
-			{
-				"displayName": "External Id",
-				"name": "externalId",
-				"type": "string",
-				"default": "",
-				"description": "The Inbox external ID of the prospect. Must be provided if `externalPlatformId` is not provided.",
-				"routing": {
-					"send": {
-						"property": "externalId",
-						"propertyInDotNotation": false,
-						"type": "body",
-						"value": "={{ $value }}"
-					}
-				}
-			}
-		]
-	},
-	{
-		"displayName": "Additional Fields",
-		"name": "additionalFields",
-		"type": "collection",
-		"placeholder": "Add Field",
-		"default": {},
-		"displayOptions": {
-			"show": {
-				"resource": [
-					"Prospects"
-				],
-				"operation": [
-					"Prospects Update"
-				]
-			}
-		},
-		"options": [
 			{
 				"displayName": "Notes",
 				"name": "notes",
@@ -2036,13 +2453,403 @@
 				}
 			},
 			{
-				"displayName": "Status Id",
-				"name": "statusId",
+				"displayName": "Assignee Id",
+				"name": "assigneeId",
 				"type": "string",
 				"default": "",
 				"routing": {
 					"send": {
-						"property": "statusId",
+						"property": "assigneeId",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads List"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Account Link Id",
+				"name": "accountLinkId",
+				"description": "Threads of these account links. Add several to match any of them.",
+				"default": [],
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "accountLinkId",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Platform",
+				"name": "platform",
+				"description": "Add several to match any of them.",
+				"default": [],
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "platform",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Contact Id",
+				"name": "contactId",
+				"description": "Threads with these contacts. With `accountLinkId`, finds the thread between an account and a contact. Add several to match any of them.",
+				"default": [],
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "contactId",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Folder",
+				"name": "folder",
+				"description": "Defaults to `inbox`, threads that are neither archived nor requests. `noReply` is the `inbox` threads whose latest activity is inbound. `requests` holds unarchived threads where `isRequest` is true. `archived` includes requests. `all` spans every folder. Every other filter narrows the folder.",
+				"default": "inbox",
+				"type": "options",
+				"options": [
+					{
+						"name": "Inbox",
+						"value": "inbox"
+					},
+					{
+						"name": "No Reply",
+						"value": "noReply"
+					},
+					{
+						"name": "Requests",
+						"value": "requests"
+					},
+					{
+						"name": "Archived",
+						"value": "archived"
+					},
+					{
+						"name": "All",
+						"value": "all"
+					}
+				],
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "folder",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Tag",
+				"name": "tag",
+				"description": "Threads whose contact has one of these tags. Add several to match any of them.",
+				"default": [],
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "tag",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Status",
+				"name": "status",
+				"description": "Threads whose contact has one of these statuses. Add several to match any of them.",
+				"default": [],
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "status",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Assignee Id",
+				"name": "assigneeId",
+				"description": "Threads whose `assigneeId`, the thread's own assignee or else its contact's, is one of these members. Add several to match any of them.",
+				"default": [],
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "assigneeId",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Unassigned",
+				"name": "unassigned",
+				"description": "`true` keeps threads with no assignee, including through their contact. Not combinable with `assigneeId`.",
+				"default": true,
+				"type": "boolean",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "unassigned",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Campaign Id",
+				"name": "campaignId",
+				"description": "Threads these campaigns sent a message in. Campaign sends archive the thread, so pair it with `folder=archived` or `all`. Add several to match any of them.",
+				"default": [],
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "campaignId",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"multipleValues": true
+				}
+			},
+			{
+				"displayName": "Q",
+				"name": "q",
+				"description": "Searches profile display names, usernames and the activity preview. Results follow `order`, not relevance.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "q",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Order",
+				"name": "order",
+				"description": "Sort direction by inbox order: `activity.at`, or `createdAt` for a thread with no activity. A reminder or an accepted message request moves a thread up until its next message, without changing `activity.at`. Defaults to `desc`, newest first.",
+				"default": "desc",
+				"type": "options",
+				"options": [
+					{
+						"name": "Desc",
+						"value": "desc"
+					},
+					{
+						"name": "Asc",
+						"value": "asc"
+					}
+				],
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "order",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Expand",
+				"name": "expand",
+				"description": "Related resources to embed next to their ID field, one path per key, at most 4.",
+				"default": [],
+				"type": "multiOptions",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "expand",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"options": [
+					{
+						"name": "Profile",
+						"value": "profile"
+					},
+					{
+						"name": "Contact",
+						"value": "contact"
+					},
+					{
+						"name": "Account Link",
+						"value": "accountLink"
+					},
+					{
+						"name": "Assignee",
+						"value": "assignee"
+					}
+				]
+			},
+			{
+				"displayName": "Limit",
+				"name": "limit",
+				"description": "Page size, from 1 to 100. Defaults to 50.",
+				"default": 50,
+				"type": "number",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "limit",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"minValue": 1,
+					"maxValue": 100
+				}
+			},
+			{
+				"displayName": "Cursor",
+				"name": "cursor",
+				"description": "The previous page's `nextCursor`. Opaque, and valid only with the filters it was issued for.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursor",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Get"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Expand",
+				"name": "expand",
+				"description": "Related resources to embed next to their ID field, one path per key, at most 4.",
+				"default": [],
+				"type": "multiOptions",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "expand",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"options": [
+					{
+						"name": "Profile",
+						"value": "profile"
+					},
+					{
+						"name": "Contact",
+						"value": "contact"
+					},
+					{
+						"name": "Account Link",
+						"value": "accountLink"
+					},
+					{
+						"name": "Assignee",
+						"value": "assignee"
+					}
+				]
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Threads"
+				],
+				"operation": [
+					"Threads Update"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Archived",
+				"name": "archived",
+				"type": "boolean",
+				"default": true,
+				"description": "Also applied on the platform when the account link has `thread:archive:mutate`.",
+				"routing": {
+					"send": {
+						"property": "archived",
 						"propertyInDotNotation": false,
 						"type": "body",
 						"value": "={{ $value }}"
@@ -2050,30 +2857,17 @@
 				}
 			},
 			{
-				"displayName": "Add Tags",
-				"name": "addTags",
-				"type": "json",
-				"default": "[\n  null\n]",
+				"displayName": "Unread",
+				"name": "unread",
+				"type": "boolean",
+				"default": true,
+				"description": "Also applied on the platform when the account link has `thread:read:mutate`.",
 				"routing": {
 					"send": {
-						"property": "addTags",
+						"property": "unread",
 						"propertyInDotNotation": false,
 						"type": "body",
-						"value": "={{ JSON.parse($value) }}"
-					}
-				}
-			},
-			{
-				"displayName": "Remove Tags",
-				"name": "removeTags",
-				"type": "json",
-				"default": "[\n  null\n]",
-				"routing": {
-					"send": {
-						"property": "removeTags",
-						"propertyInDotNotation": false,
-						"type": "body",
-						"value": "={{ JSON.parse($value) }}"
+						"value": "={{ $value }}"
 					}
 				}
 			},
@@ -2092,13 +2886,247 @@
 				}
 			},
 			{
-				"displayName": "Done",
-				"name": "done",
-				"type": "boolean",
-				"default": true,
+				"displayName": "Typing Indicators",
+				"name": "typingIndicators",
+				"type": "options",
+				"default": "enabled",
+				"description": "Whether Inboxapp sends typing indicators to the platform while someone composes in this thread. `teamDefault` follows the team's setting.",
+				"options": [
+					{
+						"name": "Enabled",
+						"value": "enabled"
+					},
+					{
+						"name": "Disabled",
+						"value": "disabled"
+					},
+					{
+						"name": "Team Default",
+						"value": "teamDefault"
+					}
+				],
 				"routing": {
 					"send": {
-						"property": "done",
+						"property": "typingIndicators",
+						"propertyInDotNotation": false,
+						"type": "body",
+						"value": "={{ $value }}"
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages List"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Order",
+				"name": "order",
+				"description": "Sort direction by `createdAt`. Defaults to `desc`, newest first.",
+				"default": "desc",
+				"type": "options",
+				"options": [
+					{
+						"name": "Desc",
+						"value": "desc"
+					},
+					{
+						"name": "Asc",
+						"value": "asc"
+					}
+				],
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "order",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			},
+			{
+				"displayName": "Expand",
+				"name": "expand",
+				"description": "Related resources to embed next to their ID field, one path per key, at most 4.",
+				"default": [],
+				"type": "multiOptions",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "expand",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"options": [
+					{
+						"name": "Sent By",
+						"value": "sentBy"
+					},
+					{
+						"name": "Reactions Author",
+						"value": "reactions.author"
+					},
+					{
+						"name": "Thread",
+						"value": "thread"
+					},
+					{
+						"name": "Account Link",
+						"value": "accountLink"
+					},
+					{
+						"name": "Reply To Message",
+						"value": "replyTo.message"
+					}
+				]
+			},
+			{
+				"displayName": "Limit",
+				"name": "limit",
+				"description": "Page size, from 1 to 100. Defaults to 50.",
+				"default": 50,
+				"type": "number",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "limit",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"typeOptions": {
+					"minValue": 1,
+					"maxValue": 100
+				}
+			},
+			{
+				"displayName": "Cursor",
+				"name": "cursor",
+				"description": "The previous page's `nextCursor`. Opaque, and valid only with the filters it was issued for.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "cursor",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				}
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Get"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Expand",
+				"name": "expand",
+				"description": "Related resources to embed next to their ID field, one path per key, at most 4.",
+				"default": [],
+				"type": "multiOptions",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "expand",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"options": [
+					{
+						"name": "Sent By",
+						"value": "sentBy"
+					},
+					{
+						"name": "Reactions Author",
+						"value": "reactions.author"
+					},
+					{
+						"name": "Thread",
+						"value": "thread"
+					},
+					{
+						"name": "Account Link",
+						"value": "accountLink"
+					},
+					{
+						"name": "Reply To Message",
+						"value": "replyTo.message"
+					}
+				]
+			}
+		]
+	},
+	{
+		"displayName": "Additional Fields",
+		"name": "additionalFields",
+		"type": "collection",
+		"placeholder": "Add Field",
+		"default": {},
+		"displayOptions": {
+			"show": {
+				"resource": [
+					"Messages"
+				],
+				"operation": [
+					"Messages Send"
+				]
+			}
+		},
+		"options": [
+			{
+				"displayName": "Idempotency Key",
+				"name": "idempotency-key",
+				"description": "Makes retries safe: a replay with the same key and body returns the original message. Scoped to the team.",
+				"default": "",
+				"type": "string",
+				"routing": {
+					"request": {
+						"headers": {
+							"idempotency-key": "={{ $value }}"
+						}
+					}
+				}
+			},
+			{
+				"displayName": "Reply To Message Id",
+				"name": "replyToMessageId",
+				"type": "string",
+				"default": "",
+				"description": "A message in the thread this send lands in, to reply to.",
+				"routing": {
+					"send": {
+						"property": "replyToMessageId",
 						"propertyInDotNotation": false,
 						"type": "body",
 						"value": "={{ $value }}"
@@ -2129,6 +3157,7 @@
 				"name": "color",
 				"type": "string",
 				"default": "",
+				"description": "Defaults to a random color from `GET /colors`.",
 				"routing": {
 					"send": {
 						"property": "color",
@@ -2162,7 +3191,6 @@
 				"name": "name",
 				"type": "string",
 				"default": "",
-				"description": "The new name for the tag. Must be unique within the team. Maximum 255 characters.",
 				"routing": {
 					"send": {
 						"property": "name",
@@ -2177,6 +3205,7 @@
 				"name": "color",
 				"type": "string",
 				"default": "",
+				"description": "A color name from `GET /colors`, case-insensitive, or a 6-digit hex value. Stored as hex.",
 				"routing": {
 					"send": {
 						"property": "color",
@@ -2210,6 +3239,7 @@
 				"name": "color",
 				"type": "string",
 				"default": "",
+				"description": "A color name from `GET /colors`, case-insensitive, or a 6-digit hex value. Stored as hex.",
 				"routing": {
 					"send": {
 						"property": "color",
@@ -2243,7 +3273,6 @@
 				"name": "name",
 				"type": "string",
 				"default": "",
-				"description": "The new name for the status. Must be unique within the team. Maximum 255 characters.",
 				"routing": {
 					"send": {
 						"property": "name",
@@ -2258,6 +3287,7 @@
 				"name": "color",
 				"type": "string",
 				"default": "",
+				"description": "A color name from `GET /colors`, case-insensitive, or a 6-digit hex value. Stored as hex.",
 				"routing": {
 					"send": {
 						"property": "color",
@@ -2289,7 +3319,7 @@
 			{
 				"displayName": "After Seq",
 				"name": "afterSeq",
-				"description": "Return events after this sequence number. Omit to start from the beginning.",
+				"description": "Exclusive. A webhook's `seq` resumes right after it. Omit to start at the oldest retained event.",
 				"default": 0,
 				"type": "number",
 				"routing": {
@@ -2302,9 +3332,154 @@
 				}
 			},
 			{
+				"displayName": "Type",
+				"name": "type",
+				"description": "Only these event types. Add several to match any of them.",
+				"default": [],
+				"type": "multiOptions",
+				"routing": {
+					"send": {
+						"type": "query",
+						"property": "type",
+						"value": "={{ $value }}",
+						"propertyInDotNotation": false
+					}
+				},
+				"options": [
+					{
+						"name": "Thread Created",
+						"value": "thread.created"
+					},
+					{
+						"name": "Thread Deleted",
+						"value": "thread.deleted"
+					},
+					{
+						"name": "Thread Assigned",
+						"value": "thread.assigned"
+					},
+					{
+						"name": "Thread Unassigned",
+						"value": "thread.unassigned"
+					},
+					{
+						"name": "Thread Archived",
+						"value": "thread.archived"
+					},
+					{
+						"name": "Thread Unarchived",
+						"value": "thread.unarchived"
+					},
+					{
+						"name": "Thread Typing",
+						"value": "thread.typing"
+					},
+					{
+						"name": "Message Sent",
+						"value": "message.sent"
+					},
+					{
+						"name": "Message Received",
+						"value": "message.received"
+					},
+					{
+						"name": "Message Edited",
+						"value": "message.edited"
+					},
+					{
+						"name": "Message Deleted",
+						"value": "message.deleted"
+					},
+					{
+						"name": "Message Reaction Added",
+						"value": "message.reactionAdded"
+					},
+					{
+						"name": "Message Reaction Removed",
+						"value": "message.reactionRemoved"
+					},
+					{
+						"name": "Contact Status Changed",
+						"value": "contact.statusChanged"
+					},
+					{
+						"name": "Contact Tags Changed",
+						"value": "contact.tagsChanged"
+					},
+					{
+						"name": "Contact Notes Changed",
+						"value": "contact.notesChanged"
+					},
+					{
+						"name": "Contact Valuation Changed",
+						"value": "contact.valuationChanged"
+					},
+					{
+						"name": "Contact Assignee Changed",
+						"value": "contact.assigneeChanged"
+					},
+					{
+						"name": "Tag Created",
+						"value": "tag.created"
+					},
+					{
+						"name": "Tag Updated",
+						"value": "tag.updated"
+					},
+					{
+						"name": "Tag Deleted",
+						"value": "tag.deleted"
+					},
+					{
+						"name": "Status Created",
+						"value": "status.created"
+					},
+					{
+						"name": "Status Updated",
+						"value": "status.updated"
+					},
+					{
+						"name": "Status Deleted",
+						"value": "status.deleted"
+					},
+					{
+						"name": "Campaign Created",
+						"value": "campaign.created"
+					},
+					{
+						"name": "Campaign Started",
+						"value": "campaign.started"
+					},
+					{
+						"name": "Campaign Paused",
+						"value": "campaign.paused"
+					},
+					{
+						"name": "Campaign Resumed",
+						"value": "campaign.resumed"
+					},
+					{
+						"name": "Campaign Completed",
+						"value": "campaign.completed"
+					},
+					{
+						"name": "Target Contacted",
+						"value": "target.contacted"
+					},
+					{
+						"name": "Target Follow Up Sent",
+						"value": "target.followUpSent"
+					},
+					{
+						"name": "Target Replied",
+						"value": "target.replied"
+					}
+				]
+			},
+			{
 				"displayName": "Limit",
 				"name": "limit",
-				"description": "Maximum number of events to return. Defaults to 100, maximum 1000.",
+				"description": "Events to read, from 1 to 1000. Defaults to 100.",
 				"default": 100,
 				"type": "number",
 				"routing": {
@@ -2314,6 +3489,10 @@
 						"value": "={{ $value }}",
 						"propertyInDotNotation": false
 					}
+				},
+				"typeOptions": {
+					"minValue": 1,
+					"maxValue": 1000
 				}
 			}
 		]

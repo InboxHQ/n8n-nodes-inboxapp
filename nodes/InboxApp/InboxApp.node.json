@@ -3,16 +3,16 @@
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Sales", "Communication"],
-	"alias": ["inbox", "twitter", "x", "dm", "prospect", "thread", "message"],
+	"alias": ["inbox", "twitter", "x", "dm", "contact", "thread", "message"],
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://docs.inboxapp.com/api-reference/introduction"
+				"url": "https://docs.inboxapp.com/v2/developer-api"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://docs.inboxapp.com/api-reference/introduction"
+				"url": "https://docs.inboxapp.com/v2/developer-api"
 			}
 		]
 	}

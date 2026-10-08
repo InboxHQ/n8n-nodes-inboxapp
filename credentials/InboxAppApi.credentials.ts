@@ -13,7 +13,7 @@ export class InboxAppApi implements ICredentialType {
 
 	icon: Icon = 'file:icons/inboxapp.svg';
 
-	documentationUrl = 'https://docs.inboxapp.com/api-reference/introduction';
+	documentationUrl = 'https://docs.inboxapp.com/v2/developer-api';
 
 	properties: INodeProperties[] = [
 		{
@@ -37,7 +37,7 @@ export class InboxAppApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: 'https://inboxapp.com/api/v1',
+			baseURL: 'https://inboxapp.com/api/v2',
 			url: '/team',
 			method: 'GET',
 		},
